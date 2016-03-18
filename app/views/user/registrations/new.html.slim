@@ -1,0 +1,33 @@
+.container
+  #signupbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2[style="margin-top:50px"]
+    .panel.panel-info
+      .panel-heading
+        .panel-title
+          | Sign Up
+      .panel-body
+        = form_for(resource, :html => {:class => "form-horizontal", :multipart => true}, as: resource_name, url: registration_path(resource_name)) do |f|
+          = devise_error_messages!
+          .input-group[style="margin-bottom: 25px"]
+            span.input-group-addon
+              i.fa.fa-envelope-o.fa-fw
+            = f.email_field :email, autofocus: true, :class=>"form-control", :placeholder=>"email"
+          /.input-group[style="margin-bottom: 25px"]
+            span.input-group-addon
+              i.fa.fa-file-image-o
+            = f.file_field :avatar, :class=>"form-control"
+            = f.hidden_field :avatar_cache
+          .input-group[style="margin-bottom: 25px"]
+            span.input-group-addon
+              i.fa.fa-key.fa-fw
+            = f.password_field :password, autocomplete: "off", :class=>"form-control", :placeholder=>"password"
+          .input-group[style="margin-bottom: 25px"]
+            span.input-group-addon
+              i.fa.fa-key.fa-fw
+            = f.password_field :password_confirmation, autocomplete: "off", :class=>"form-control", :placeholder=>"password confirmation"
+          .form-group[style="margin-top:10px"]
+            .col-sm-12.controls
+              = f.submit "Sign up", :class=>'btn btn-primary' ,:id=>'btn-signup'
+          .form-group
+            .col-md-12.control
+              div[style="border-top: 1px solid#888; padding-top:15px; font-size:85%"]
+                = render "user/shared/links"

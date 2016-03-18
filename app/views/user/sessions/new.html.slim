@@ -1,0 +1,33 @@
+.container
+  #loginbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2[style="margin-top:50px;"]
+    .panel.panel-info
+      .panel-heading
+        .panel-title
+          | Sign In
+        div[style="float:right; font-size: 80%; position: relative; top:-10px"]
+          = link_to('Forgot password?', new_password_path('user'))
+      .panel-body[style="padding-top:30px"]
+        #login-alert.alert.alert-danger.col-sm-12[style="display:none"]
+        = form_for(resource, :html => {:class => "form-horizontal"}, as: resource_name, url: session_path(resource_name)) do |f|
+          .input-group[style="margin-bottom: 25px"]
+            span.input-group-addon
+              i.fa.fa-envelope-o.fa-fw
+            = f.email_field :email, autofocus: true, :class=>"form-control", :placeholder=>"email"
+          .input-group[style="margin-bottom: 25px"]
+            span.input-group-addon
+              i.fa.fa-key.fa-fw
+            = f.password_field :password, autocomplete: "off", :class=>"form-control", :placeholder=>"password"
+            - if devise_mapping.rememberable?
+          .input-group
+            .checkbox
+              label
+                = f.check_box :remember_me
+                |  Remember me
+          .form-group[style="margin-top:10px"]
+            .col-sm-12.controls
+              = f.submit "Log in", :class=>'btn btn-primary'
+          .form-group
+            .col-md-12.control
+              div[style="border-top: 1px solid#888; padding-top:15px; font-size:85%"]
+                '  Don't have an account?
+                = link_to('Sign Up Here', new_user_registration_path)
