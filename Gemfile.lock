@@ -91,6 +91,8 @@ GEM
     git-version-bump (0.15.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    habtm_generator (0.5)
+      activerecord
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -237,6 +239,7 @@ DEPENDENCIES
   elasticsearch-model
   elasticsearch-rails
   font-awesome-rails
+  habtm_generator
   haml-rails (~> 0.9)
   jbuilder (~> 2.0)
   jquery-rails
