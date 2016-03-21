@@ -12,6 +12,5 @@ unless User.exists?(email: 'root@me.com')
       password_confirmation: '12345678'
     )
   user.add_role 'super_admin'
-  user.skip_confirmation!
   user.save
 end
