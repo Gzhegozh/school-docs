@@ -1,0 +1,40 @@
+.col-md-10
+  %h1
+    School Groups
+  .panel.panel-default.panel-table
+    .panel-heading
+      .row
+        .col.col-xs-6
+          .h3{class: 'panel-title'}
+            Edit school groups below
+        .col.col-xs-6.text-right
+          = link_to 'New School group', new_school_group_path, class: 'btn btn-sm btn-primary'
+    .panel-body
+      - if !@school_groups.empty?
+        %table{class: "table table-striped table-bordered table-list"}
+          %thead
+            %tr
+              %th
+                %em{class: "fa fa-cog"}
+              %th{class: "hidden-xs col col-lg-1"}
+                ID
+              %th
+                School Group Name
+          %tbody
+            - @school_groups.each do |school_group|
+              %tr
+                %td{align: "center"}
+                  %a{class: "btn btn-default", href: "#{edit_school_group_path(school_group)}"}
+                    %em{class: "fa fa-pencil"}
+                  = link_to school_group, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-danger" do
+                    %em{class: "fa fa-trash"}
+                %td{class: "hidden-xs"}
+                  = school_group.id
+                %td
+                  = school_group.name
+                  = link_to 'More...', school_group_path(school_group), class: "col col-lg-1", style: "float: right"
+      - else
+        %br
+        .col-lg-6
+          .alert.alert-warning
+            There is no school groups yet but you may create one!
