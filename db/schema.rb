@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160321092408) do
+ActiveRecord::Schema.define(version: 20160321202324) do
+
+  create_table "column_instances", force: :cascade do |t|
+    t.integer  "tab_instance_id", limit: 4
+    t.integer  "column_id",       limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "columns", force: :cascade do |t|
+    t.integer  "tab_id",     limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "grade_id",    limit: 4
+    t.datetime "finished_at"
+    t.integer  "mark",        limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "grades", force: :cascade do |t|
     t.string   "name",                      limit: 255
@@ -21,6 +43,13 @@ ActiveRecord::Schema.define(version: 20160321092408) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
+
+  create_table "grades_tabs", id: false, force: :cascade do |t|
+    t.integer "grade_id", limit: 4
+    t.integer "tab_id",   limit: 4
+  end
+
+  add_index "grades_tabs", ["grade_id", "tab_id"], name: "grades_tabs_index", unique: true, using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.string   "subject",     limit: 255
@@ -66,6 +95,18 @@ ActiveRecord::Schema.define(version: 20160321092408) do
     t.integer  "school_group_id", limit: 4
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "tab_instances", force: :cascade do |t|
+    t.integer  "enrollment_id", limit: 4
+    t.integer  "tab_id",        limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "tabs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

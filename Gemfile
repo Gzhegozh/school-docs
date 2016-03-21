@@ -7,15 +7,15 @@ gem 'react-rails'
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
-gem "haml-rails", "~> 0.9"
+gem 'haml-rails', '~> 0.9'
 gem 'quiet_assets'
 
 gem 'devise'
 
 gem 'mysql2'
 
-gem "slim-rails"
-gem "font-awesome-rails"
+gem 'slim-rails'
+gem 'font-awesome-rails'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -28,6 +28,7 @@ gem 'rolify'
 
 group :development, :test do
   gem 'byebug'
+  gem 'habtm_generator'
 end
 
 group :development do
