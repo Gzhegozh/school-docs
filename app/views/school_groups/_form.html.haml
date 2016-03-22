@@ -5,4 +5,4 @@
       = f.text_field :name, class: 'form-control', required: true
     .form-group
       = f.submit nil,class: 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), school_groups_path, :class => 'btn btn-default'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), school_group_path(@school_group), :class => 'btn btn-default'

@@ -10,9 +10,9 @@
     = form_for user, :url => url_for(controller: :admin, action: :set_admin), method: :post do |f|
       - if !user.has_role? :super_admin
         = user.email
-        = f.radio_button :id, user.id
+        = f.hidden_field :id, value: user.id
         = f.hidden_field :school_group_id, value: params[:id]
-        = f.submit
+        = f.submit 'Choose', class: 'btn btn-primary'
       -#= user.profile.name
       -#= user.profile.last_name
       %br
