@@ -1,0 +1,18 @@
+.col-md-10
+  %h1
+    Editing school group
+
+= render 'form'
+.col-md-10
+  %h2
+    Choose an administrator for school group
+  - @users.all.each do |user|
+    = form_for user, :url => url_for(controller: :admin, action: :set_admin), method: :post do |f|
+      - if !user.has_role? :super_admin
+        = user.email
+        = f.hidden_field :id, value: user.id
+        = f.hidden_field :school_group_id, value: params[:id]
+        = f.submit 'Choose', class: 'btn btn-primary'
+      -#= user.profile.name
+      -#= user.profile.last_name
+      %br

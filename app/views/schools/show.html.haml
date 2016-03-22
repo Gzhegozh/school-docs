@@ -1,0 +1,5 @@
+.col-md-10
+  %h2
+    = @school.name
+  = link_to 'Edit', edit_school_path(@school), class: 'btn btn-primary'
+  = link_to 'Back', school_groups_path

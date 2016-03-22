@@ -6,3 +6,4 @@
 /config/database.yml
 /config/secrets.yml
 /.idea
+/vendor/bundle
