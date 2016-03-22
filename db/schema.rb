@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322090109) do
+ActiveRecord::Schema.define(version: 20160322112335) do
+
+  create_table "allergies", force: :cascade do |t|
+    t.string   "targets",        limit: 255
+    t.integer  "enrollments_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "column_instances", force: :cascade do |t|
     t.integer  "tab_instance_id", limit: 4
@@ -53,6 +60,27 @@ ActiveRecord::Schema.define(version: 20160322090109) do
 
   add_index "grades_tabs", ["grade_id", "tab_id"], name: "grades_tabs_index", unique: true, using: :btree
 
+  create_table "impersonations", force: :cascade do |t|
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.integer  "enrollments_id",  limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "impersonator_id", limit: 4, null: false
+    t.integer  "user_id",         limit: 4, null: false
+  end
+
+  add_index "impersonations", ["impersonator_id"], name: "index_impersonations_on_impersonator_id", using: :btree
+  add_index "impersonations", ["user_id"], name: "index_impersonations_on_user_id", using: :btree
+
+  create_table "medications", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.string   "notes",          limit: 255
+    t.integer  "enrollments_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.string   "subject",     limit: 255
     t.text     "body",        limit: 65535
@@ -74,6 +102,16 @@ ActiveRecord::Schema.define(version: 20160322090109) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  create_table "relationships", force: :cascade do |t|
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "child_id",   limit: 4, null: false
+    t.integer  "parent_id",  limit: 4, null: false
+  end
+
+  add_index "relationships", ["child_id"], name: "index_relationships_on_child_id", using: :btree
+  add_index "relationships", ["parent_id"], name: "index_relationships_on_parent_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -136,6 +174,10 @@ ActiveRecord::Schema.define(version: 20160322090109) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  add_foreign_key "impersonations", "users"
+  add_foreign_key "impersonations", "users", column: "impersonator_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "relationships", "users", column: "child_id"
+  add_foreign_key "relationships", "users", column: "parent_id"
 end
