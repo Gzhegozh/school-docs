@@ -10,6 +10,7 @@ class SchoolGroupsController < ApplicationController
   # GET /school_groups/1
   # GET /school_groups/1.json
   def show
+    @admin = User.with_role(:admin, @school_group).first
   end
 
   # GET /school_groups/new
@@ -19,6 +20,7 @@ class SchoolGroupsController < ApplicationController
 
   # GET /school_groups/1/edit
   def edit
+    @users = User.all
   end
 
   # POST /school_groups

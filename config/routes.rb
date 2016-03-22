@@ -8,4 +8,5 @@ Rails.application.routes.draw do
                                       passwords: 'user/passwords'}
 
   get 'schools/new/:school_group_id' => 'schools#new'
+  post 'admin/set_admin/:id/' => 'admin#set_admin'
 end

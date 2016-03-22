@@ -3,6 +3,13 @@
     = @school_group.name
   %h3
     Administrator for current school group
+  - if @admin.blank?
+    .alert.alert-warning
+      Current school group hasn't administrator yet!
+  - else
+    = @admin.email
+  %br
+
   = link_to 'Edit', edit_school_group_path(@school_group), class: 'btn btn-primary'
   = link_to 'Back', school_groups_path
   %h3
