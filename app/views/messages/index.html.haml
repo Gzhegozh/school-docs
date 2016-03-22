@@ -1,0 +1,26 @@
+%h1 Listing messages
+
+%table
+  %thead
+    %tr
+      %th Subject
+      %th Sender
+      %th Created
+
+  %tbody
+    - @messages.each do |message|
+      %tr
+        %th
+          = message.subject
+        %th
+          = message.sender_id
+        %th
+          = time_ago_in_words(message.created_at)
+          ago
+        %td= link_to 'Show', message
+        %td= link_to 'Edit', edit_message_path(message)
+        %td= link_to 'Destroy', message, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Message', new_message_path
