@@ -47,7 +47,7 @@ class User::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
 
     devise_parameter_sanitizer.for(:account_update) << { :profile_attributes =>
-                                                              [:name, :last_name, :middle_name, :birthday, :phone, :avatar, :avatar_cache]}
+                                                              [:id, :name, :last_name, :middle_name, :birthday, :phone, :avatar, :avatar_cache]}
     end
   def update_resource(resource, params)
     resource.update_without_password(params)

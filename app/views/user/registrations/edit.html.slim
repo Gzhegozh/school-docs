@@ -2,19 +2,18 @@
   h1.page-header style = 'margin-top: 10px;'
     = t('.edit_profile')
   .row
+    - if resource.profile.nil?
+      - resource.build_profile
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class:'form-horizontal', method: :put, :multipart => true}) do |f|
       /! left column
       .col-md-4.col-sm-6.col-xs-12
         = f.fields_for :profile do |profile_form|
           .text-center
-            /- if current_user.profile.avatar.url.present?
             = image_tag(current_user.profile.avatar.url, class: 'avatar img-circle img-thumbnail', alt: 'avatar')
-            /- else
-              img.avatar.img-circle.img-thumbnail alt="avatar" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" /
             h6
               = t('.upload_a_different_photo') + '...'
               = profile_form.file_field(:avatar, class: 'text-center center-block well well-sm')
-              = profile_form.hidden_field :avatar_cache
+              = profile_form.hidden_field :avatar_cache, :value => current_user.profile.avatar_cache
       /! edit form column
       .col-md-8.col-sm-6.col-xs-12.personal-info
         - unless devise_error_messages! == ''
