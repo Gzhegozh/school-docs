@@ -1,0 +1,80 @@
+.container style=("padding-top: 0px;")
+  h1.page-header style = 'margin-top: 10px;'
+    = t('.edit_profile')
+  .row
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class:'form-horizontal', method: :put, :multipart => true}) do |f|
+      /! left column
+      .col-md-4.col-sm-6.col-xs-12
+        = f.fields_for :profile do |profile_form|
+          .text-center
+            /- if current_user.profile.avatar.url.present?
+            = image_tag(current_user.profile.avatar.url, class: 'avatar img-circle img-thumbnail', alt: 'avatar')
+            /- else
+              img.avatar.img-circle.img-thumbnail alt="avatar" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" /
+            h6
+              = t('.upload_a_different_photo') + '...'
+              = profile_form.file_field(:avatar, class: 'text-center center-block well well-sm')
+              = profile_form.hidden_field :avatar_cache
+      /! edit form column
+      .col-md-8.col-sm-6.col-xs-12.personal-info
+        - unless devise_error_messages! == ''
+          .alert.alert-info.alert-dismissable
+            a.panel-close.close data-dismiss="alert"  ×
+            i.fa.fa-coffee
+              = devise_error_messages!
+        h3
+          = t('.personal_info')
+        form.form-horizontal role="form"
+          /.form-group
+            label.col-lg-3.control-label
+              = t('.language')+':'
+            .col-lg-8
+              = f.select :locale, options_for_select([['English', 'en'], ['Русский', 'ru']],
+                      current_user.locale.eql?('ru') ? 'ru' : 'en'), {}, { class: 'form-control'}
+          = f.fields_for :profile do |profile_form|
+            .form-group
+              label.col-lg-3.control-label
+                = t('.name')+':'
+              .col-lg-8
+                = profile_form.text_field :name, autocomplete: 'on', class: 'form-control'
+            .form-group
+              label.col-lg-3.control-label
+                = t('.last_name')+':'
+              .col-lg-8
+                = profile_form.text_field :last_name, autocomplete: 'on', class: 'form-control'
+            .form-group
+              label.col-md-3.control-label
+                = t('.middle_name')+':'
+              .col-md-8
+                = profile_form.text_field :middle_name, autocomplete: 'on', class: 'form-control'
+            .form-group
+              label.col-md-3.control-label
+                = t('.birthday')+':'
+              .col-md-8
+                = profile_form.date_field :birthday, class: 'form-control'
+            .form-group
+              label.col-md-3.control-label
+                = t('.phone')
+              .col-md-8
+                = profile_form.text_field :phone, autocomplete: 'on', class: 'form-control'
+          .form-group
+            label.col-md-3.control-label
+              = t('.password')+':'
+            .col-md-8
+              = f.password_field :password, autocomplete: 'off', class: 'form-control'
+          .form-group
+            label.col-md-3.control-label
+              = t('.password_confirmation')+':'
+            .col-md-8
+              = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
+          .form-group
+            label.col-md-3.control-label
+              = t('.current_password')+':'
+            .col-md-8
+              = f.password_field :current_password, autocomplete: 'off',  class: 'form-control'
+          .form-group
+            label.col-md-3.control-label
+            .col-md-8
+              = f.submit 'Save changes' , :class=>'btn btn-primary'
+                / span
+                /= button_to t('.cancel'), root_path, :class=>'btn btn-default'
