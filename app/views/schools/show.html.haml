@@ -1,3 +1,4 @@
+- breadcrumb :school, @school
 .col-md-12
   %h2
     = @school.name
@@ -39,20 +40,21 @@
     /      %span.sr-only 60% Complete
     /    %span.progress-type HTML / HTML5
     /    %span.progress-completed 60%
-  %h2 Grades and activities
-  .list-group
-    .list-group-item
-      .list-group-item-heading
-        %h4 Активити один
-      .list-group-item-text Описание активити один
-    .list-group-item
-      .list-group-item-heading
-        %h4 Активити два
-      .list-group-item-text Описание активити два
-    .list-group-item
-      .list-group-item-heading
-        %h4 Активити три
-      .list-group-item-text Описание активити три
-
-  = link_to 'Edit', edit_school_path(@school), class: 'btn btn-primary'
-  = link_to 'Back', school_groups_path
+  .col-md-8
+    %h2 Grades and activities
+    - if !@school.grades.blank?
+      .list-group
+        - @school.grades each do |gr|
+          .list-group-item
+            .list-group-item-heading
+              %h4
+                = gr.name
+            .list-group-item-text
+              sjkdfhjf
+    - else
+      %br
+        .alert.alert-warning
+          There is no grades or activities yet but you may create one!
+  .col.col-lg-7
+    = link_to 'Edit', edit_school_path(@school), class: 'btn btn-primary'
+    = link_to 'Back', school_groups_path

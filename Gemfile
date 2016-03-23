@@ -27,6 +27,8 @@ gem 'puma'
 gem 'rolify'
 gem 'carrierwave'
 
+gem 'gretel'
+
 
 group :development, :test do
   gem 'byebug'
