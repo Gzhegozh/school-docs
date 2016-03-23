@@ -4,7 +4,7 @@ class CreateEnrollments < ActiveRecord::Migration
       t.references :user
       t.references :grade
 
-      t.datetime :finished_at
+      t.date :finished_at
       t.integer :mark
 
       t.timestamps null: false

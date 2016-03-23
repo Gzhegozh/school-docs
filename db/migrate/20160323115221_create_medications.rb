@@ -4,8 +4,6 @@ class CreateMedications < ActiveRecord::Migration
       t.string :name
       t.string :notes
 
-      t.references :enrollments
-
       t.timestamps null: false
     end
   end
