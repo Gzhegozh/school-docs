@@ -1,3 +1,70 @@
 // Place all the styles related to the Schools controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.completed-enrollments {
+  margin-top: 20px;
+  display: table;
+}
+
+.completed-enrollments > .caption {
+  margin: 5px auto 5px;
+  text-align: center;
+
+}
+
+.chart {
+  position:relative;
+  //margin:80px;
+  width:220px; height:220px;
+}
+
+.chart > canvas {
+  display: block;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+.chart > span {
+  color:#555;
+  display:block;
+  line-height:220px;
+  text-align:center;
+  width:220px;
+  font-family:sans-serif;
+  font-size:40px;
+  font-weight:100;
+  margin-left:5px;
+}
+
+/*
+.progress {
+  position: relative;
+  height: 30px;
+}
+.progress > .progress-type {
+  position: absolute;
+  left: 0px;
+  font-size: 120%;
+  font-weight: 800;
+  padding: 3px 30px 15px 10px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(25, 25, 25, 0.2);
+}
+.progress > .progress-completed {
+  position: absolute;
+  right: 0px;
+  font-weight: 800;
+  padding: 3px 10px 2px;
+}*/
+
+.progress-bar {
+  color: #42dca3;
+  background-color: #555555 !important;
+}
+
+.progress {
+  color: #42dca3;
+  z-index: 5;
+}
