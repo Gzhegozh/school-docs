@@ -10,7 +10,7 @@ class SchoolGroupsController < ApplicationController
   # GET /school_groups/1
   # GET /school_groups/1.json
   def show
-    @admin = User.with_role(:admin, @school_group).first
+    @admin = User.with_role(:admin, @school_group)
   end
 
   # GET /school_groups/new

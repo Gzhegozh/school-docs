@@ -13,7 +13,7 @@
             h6
               = t('.upload_a_different_photo') + '...'
               = profile_form.file_field(:avatar, class: 'text-center center-block well well-sm')
-              = profile_form.hidden_field :avatar_cache, :value => current_user.profile.avatar_cache
+              = profile_form.hidden_field :avatar_cache
       /! edit form column
       .col-md-8.col-sm-6.col-xs-12.personal-info
         - unless devise_error_messages! == ''
