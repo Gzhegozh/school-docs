@@ -13,7 +13,6 @@ class SchoolsController < ApplicationController
   end
 
   # GET /schools/new
-  # GET /schools/new/:school_group_id - from routes.rb
   def new
     @school = School.new
   end

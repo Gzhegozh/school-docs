@@ -56,5 +56,5 @@
         .alert.alert-warning
           There is no grades or activities yet but you may create one!
   .col.col-lg-7
-    = link_to 'Edit', edit_school_path(@school), class: 'btn btn-primary'
+    = link_to 'Edit', edit_school_path(@school, school_group_id: @school.school_group_id), class: 'btn btn-primary'
     = link_to 'Back', school_groups_path

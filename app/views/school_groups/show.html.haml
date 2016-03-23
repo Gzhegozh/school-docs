@@ -22,7 +22,7 @@
           .h3{class: 'panel-title'}
             Edit schools below
         .col.col-xs-6.text-right
-          = link_to 'New School', new_school_path + "/#{@school_group.id}", class: 'btn btn-sm btn-primary'
+          = link_to 'New School', new_school_path(school_group_id: @school_group.id), class: 'btn btn-sm btn-primary'
     .panel-body
       - if !@school_group.schools.empty?
         %table{class: "table table-striped table-bordered table-list"}
