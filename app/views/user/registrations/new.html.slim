@@ -19,6 +19,10 @@
           .input-group[style="margin-bottom: 25px"]
             span.input-group-addon
               i.fa.fa-key.fa-fw
+            = f.select :roles, options_for_select([['Student', 'student'], ['Parent', 'parent']]), {}, { class: 'form-control'}
+          .input-group[style="margin-bottom: 25px"]
+            span.input-group-addon
+              i.fa.fa-key.fa-fw
             = f.password_field :password, autocomplete: "off", :class=>"form-control", :placeholder=>"password"
           .input-group[style="margin-bottom: 25px"]
             span.input-group-addon
