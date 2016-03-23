@@ -6,4 +6,5 @@ class EnrollmentFormInstance < ActiveRecord::Base
   has_many :contacts
   has_one :questionnaire
   has_one :emergency
+  has_many :allergies
 end
