@@ -39,6 +39,16 @@ end
   end
 end
 
+['Школы минска', 'Школы Бобруйска'].each do |name|
+  unless SchoolGroup.exists?(name: name)
+    school_group = SchoolGroup.new(
+       name: name
+    )
+    school_group.save
+  end
+end
+
+
 ['admin1@gmail.com','admin2@gmail.com','admin3@gmail.com','admin4@gmail.com'].each do |email|
   unless User.exists?(email: email)
     user = User.new(
@@ -46,7 +56,7 @@ end
         password: '12345678',
         password_confirmation: '12345678'
     )
-    user.add_role 'admin'
+    user.add_role 'admin', SchoolGroup.last
     user.save
   end
 end
