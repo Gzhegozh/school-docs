@@ -1,5 +1,58 @@
-.col-md-10
+.col-md-12
   %h2
     = @school.name
+
+  .row
+    .col-md-4
+      %div.completed-enrollments
+        .chart#graph{"data-percent" => "88"}
+        %div.caption
+          %h4 Completed enrollments
+    .col-md-8
+      %h4 Medications
+      .progress
+        .progress-bar{'style' => 'width: 70%;'}
+      %hr
+      %h4 Allergies
+      .progress
+        .progress-bar{'style' => 'width: 70%;'}
+      %hr
+      %h4 Restrictions
+      .progress
+        .progress-bar{'style' => 'width: 70%;'}
+      %hr
+    /.col-md-8
+    /  .progress
+    /    .progress-bar{:role => 'progressbar',  'aria-valuenow' => '60', 'aria-valuemin' => '0', 'aria-valuemax' => '100', 'style' => 'width: 60%;'}
+    /      %span.sr-only 60% Complete
+    /    %span.progress-type HTML / HTML5
+    /    %span.progress-completed 60%
+
+    /  .progress
+    /    .progress-bar{:role => 'progressbar',  'aria-valuenow' => '60', 'aria-valuemin' => '0', 'aria-valuemax' => '100', 'style' => 'width: 60%;'}
+    /      %span.sr-only 60% Complete
+    /    %span.progress-type HTML / HTML5
+    /    %span.progress-completed 60%
+
+    /  .progress
+    /    .progress-bar{:role => 'progressbar',  'aria-valuenow' => '60', 'aria-valuemin' => '0', 'aria-valuemax' => '100', 'style' => 'width: 60%;'}
+    /      %span.sr-only 60% Complete
+    /    %span.progress-type HTML / HTML5
+    /    %span.progress-completed 60%
+  %h2 Grades and activities
+  .list-group
+    .list-group-item
+      .list-group-item-heading
+        %h4 Активити один
+      .list-group-item-text Описание активити один
+    .list-group-item
+      .list-group-item-heading
+        %h4 Активити два
+      .list-group-item-text Описание активити два
+    .list-group-item
+      .list-group-item-heading
+        %h4 Активити три
+      .list-group-item-text Описание активити три
+
   = link_to 'Edit', edit_school_path(@school), class: 'btn btn-primary'
   = link_to 'Back', school_groups_path
