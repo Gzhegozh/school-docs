@@ -11,41 +11,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322170135) do
+ActiveRecord::Schema.define(version: 20160323122306) do
 
-  create_table "allergies", force: :cascade do |t|
-    t.string   "targets",        limit: 255
-    t.integer  "enrollments_id", limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+  create_table "basics", force: :cascade do |t|
+    t.string   "name",                       limit: 255
+    t.string   "last_name",                  limit: 255
+    t.string   "middle_name",                limit: 255
+    t.date     "birthday"
+    t.integer  "enrllment_form_instance_id", limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
-  create_table "column_instances", force: :cascade do |t|
-    t.integer  "tab_instance_id", limit: 4
-    t.integer  "column_id",       limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "value",           limit: 255, null: false
+  create_table "contacts", force: :cascade do |t|
+    t.string   "skype",                       limit: 255
+    t.string   "phone",                       limit: 255
+    t.string   "email",                       limit: 255
+    t.integer  "enrollment_form_instance_id", limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
-  create_table "columns", force: :cascade do |t|
-    t.integer  "tab_id",     limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "name",       limit: 255, null: false
-    t.string   "type",       limit: 255, null: false
+  create_table "emergencies", force: :cascade do |t|
+    t.string   "person",                      limit: 255
+    t.string   "info",                        limit: 255
+    t.integer  "enrollment_form_instance_id", limit: 4
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
-  create_table "enrollments", force: :cascade do |t|
-    t.integer  "user_id",     limit: 4
-    t.integer  "grade_id",    limit: 4
-    t.datetime "finished_at"
-    t.integer  "mark",        limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+  create_table "enrollment_form_instances", force: :cascade do |t|
+    t.integer  "enrollment_form_id", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "user_id",            limit: 4
   end
 
-  add_index "enrollments", ["user_id", "grade_id"], name: "index_enrollments_on_user_id_and_grade_id", using: :btree
+  add_index "enrollment_form_instances", ["user_id"], name: "index_enrollment_form_instances_on_user_id", using: :btree
+
+  create_table "enrollment_form_sections", force: :cascade do |t|
+    t.integer  "enrollment_form_id", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "enrollment_forms", force: :cascade do |t|
+    t.integer  "grade_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "grades", force: :cascade do |t|
     t.string   "name",                      limit: 255
@@ -55,13 +69,6 @@ ActiveRecord::Schema.define(version: 20160322170135) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
-
-  create_table "grades_tabs", id: false, force: :cascade do |t|
-    t.integer "grade_id", limit: 4
-    t.integer "tab_id",   limit: 4
-  end
-
-  add_index "grades_tabs", ["grade_id", "tab_id"], name: "grades_tabs_index", unique: true, using: :btree
 
   create_table "impersonations", force: :cascade do |t|
     t.datetime "started_at"
@@ -77,11 +84,10 @@ ActiveRecord::Schema.define(version: 20160322170135) do
   add_index "impersonations", ["user_id"], name: "index_impersonations_on_user_id", using: :btree
 
   create_table "medications", force: :cascade do |t|
-    t.string   "name",           limit: 255
-    t.string   "notes",          limit: 255
-    t.integer  "enrollments_id", limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "name",       limit: 255
+    t.string   "notes",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -106,6 +112,18 @@ ActiveRecord::Schema.define(version: 20160322170135) do
     t.datetime "updated_at",              null: false
     t.string   "phone",       limit: 255
     t.string   "avatar",      limit: 255
+  end
+
+  create_table "questionnaires", force: :cascade do |t|
+    t.string   "topic",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -140,19 +158,6 @@ ActiveRecord::Schema.define(version: 20160322170135) do
     t.integer  "school_group_id", limit: 4
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-  end
-
-  create_table "tab_instances", force: :cascade do |t|
-    t.integer  "enrollment_id", limit: 4
-    t.integer  "tab_id",        limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
-  create_table "tabs", force: :cascade do |t|
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "name",       limit: 255, null: false
   end
 
   create_table "users", force: :cascade do |t|
