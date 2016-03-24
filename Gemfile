@@ -31,6 +31,7 @@ gem 'puma'
 gem 'rolify'
 gem 'carrierwave'
 gem 'factory_girl_rails'
+gem 'figaro'
 
 group :development, :test do
   gem 'byebug'
@@ -50,5 +51,4 @@ end
 
 group :production do
   gem "rails_12factor"
-  gem 'figaro'
 end
