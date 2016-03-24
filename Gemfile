@@ -17,6 +17,7 @@ gem 'devise'
 
 gem 'mysql2'
 gem 'pg'
+
 gem 'slim-rails'
 gem 'font-awesome-rails'
 
