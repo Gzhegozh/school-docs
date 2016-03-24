@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+
+ruby "2.3.0"
+
 gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -26,7 +29,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 gem 'rolify'
 gem 'carrierwave'
-
+gem 'factory_girl_rails'
 
 group :development, :test do
   gem 'byebug'
@@ -42,4 +45,8 @@ end
 group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda'
+end
+
+group :production do
+  gem "rails_12factor"
 end
