@@ -8,7 +8,7 @@ crumb :school_group do |school_group|
 end
 
 crumb :school do |school|
-  link school.name, school
+  link school.name, school_group_school_path
   parent school.school_group
 end
 # # Issue list

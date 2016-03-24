@@ -49,7 +49,7 @@
             .h3{class: 'panel-title'}
               Edit grades and activities below
           .col.col-xs-6.text-right
-            = link_to 'New Grade or Activity', new_school_group_path, class: 'btn btn-sm btn-primary'
+            = link_to 'New Grade or Activity', new_school_group_path(@school.school_group), class: 'btn btn-sm btn-primary'
       .panel-body
         - if !@school.grades.blank?
           .list-group
@@ -65,5 +65,5 @@
           .alert.alert-warning
             There is no grades or activities yet but you may create one!
   .col.col-lg-7
-    = link_to 'Edit', edit_school_path(@school, school_group_id: @school.school_group_id), class: 'btn btn-primary'
-    = link_to 'Back', school_groups_path
+    = link_to 'Edit', edit_school_group_school_path(@school, school_group_id: @school.school_group_id), class: 'btn btn-primary'
+    = link_to 'Back', school_group_path(@school.school_group.id)

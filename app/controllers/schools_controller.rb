@@ -14,11 +14,13 @@ class SchoolsController < ApplicationController
 
   # GET /schools/new
   def new
+    @school_group = SchoolGroup.find(params[:school_group_id])
     @school = School.new
   end
 
   # GET /schools/1/edit
   def edit
+    @school_group = SchoolGroup.find(params[:school_group_id])
   end
 
   # POST /schools
@@ -28,7 +30,7 @@ class SchoolsController < ApplicationController
 
     respond_to do |format|
       if @school.save
-        format.html { redirect_to @school, notice: 'School was successfully created.' }
+        format.html { redirect_to school_group_path(@school.school_group_id), notice: 'School was successfully created.' }
         format.json { render :show, status: :created, location: @school }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class SchoolsController < ApplicationController
   def update
     respond_to do |format|
       if @school.update(school_params)
-        format.html { redirect_to @school, notice: 'School was successfully updated.' }
+        format.html { redirect_to school_group_path(@school.school_group_id, @school.id), notice: 'School was successfully updated.' }
         format.json { render :show, status: :ok, location: @school }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class SchoolsController < ApplicationController
   def destroy
     @school.destroy
     respond_to do |format|
-      format.html { redirect_to schools_url, notice: 'School was successfully destroyed.' }
+      format.html { redirect_to school_group_path(@school.school_group_id), notice: 'School was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
