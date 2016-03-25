@@ -7,7 +7,7 @@
     .alert.alert-warning
       Current school group hasn't administrator yet!
   - else
-    = @admin.email
+    = render partial: 'partials/users_preview', collection: @admin, as: :user
   %br
 
   = link_to 'Edit', edit_school_group_path(@school_group), class: 'btn btn-primary'

@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+
+ruby "2.3.0"
+
 gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -13,6 +16,7 @@ gem 'quiet_assets'
 gem 'devise'
 
 gem 'mysql2'
+gem 'pg'
 
 gem 'slim-rails'
 gem 'font-awesome-rails'
@@ -28,6 +32,8 @@ gem 'rolify'
 gem 'carrierwave'
 gem 'mailboxer'
 gem 'simple_form'
+gem 'factory_girl_rails'
+gem 'figaro'
 
 group :development, :test do
   gem 'byebug'
@@ -43,4 +49,8 @@ end
 group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda'
+end
+
+group :production do
+  gem "rails_12factor"
 end

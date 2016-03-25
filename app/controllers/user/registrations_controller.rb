@@ -8,9 +8,15 @@ class User::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    @role = params.require(:user).permit(:roles)[:roles]
+    if @role == 'parent'
+      resource.add_role('parent')
+    else
+      resource.add_role('student')
+    end
+  end
 
   # GET /resource/edit
   # def edit

@@ -1,0 +1,46 @@
+.collapse.navbar-collapse.navbar-ex1-collapse
+  %ul.nav.navbar-nav.side-nav
+    %li
+      = link_to root_path do
+        %i.fa.fa-fw.fa-dashboard
+        Dashboard
+    - if current_user.has_role? 'student'
+      = render :partial => 'layouts/students_sidebar'
+    - elsif current_user.has_role? 'parent'
+      = render :partial => 'layouts/parents_sidebar'
+    - elsif current_user.has_role? 'admin'
+      = render :partial => 'layouts/admins_sidebar'
+    - elsif current_user.has_role? 'super_admin'
+      = render :partial => 'layouts/super_admins_sidebar'
+    /%li.active
+    /  = link_to root_path do
+    /    %i.fa.fa-fw.fa-dashboard
+    /    Dashboard
+    /%li
+    /  %a{:href => "charts.html"}
+    /    %i.fa.fa-fw.fa-bar-chart-o
+    /    Charts
+    /%li
+    /  %a{:href => "tables.html"}
+    /    %i.fa.fa-fw.fa-table
+    /    Tables
+    /%li
+    /  %a{:href => "forms.html"}
+    /    %i.fa.fa-fw.fa-edit
+    /    Forms
+    /%li
+    /  %a{:href => "bootstrap-elements.html"}
+    /    %i.fa.fa-fw.fa-desktop
+    /    Bootstrap Elements
+    /%li
+    /  %a{:href => "bootstrap-grid.html"}
+    /    %i.fa.fa-fw.fa-wrench
+    /    Bootstrap Grid
+    /%li
+    /  %a{:href => "blank-page.html"}
+    /    %i.fa.fa-fw.fa-file
+    /    Blank Page
+    /%li
+    /  %a{:href => "index-rtl.html"}
+    /    %i.fa.fa-fw.fa-dashboard
+    /    RTL Dashboard
