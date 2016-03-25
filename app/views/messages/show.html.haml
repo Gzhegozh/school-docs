@@ -1,0 +1,22 @@
+%p#notice= notice
+
+%h2
+  = @message.subject
+
+%h4
+  %b
+    = current_user.email
+  %p
+    to
+    = @sender.email
+    / = link_to @sender.email, @sender
+%p
+  = @message.body
+
+%h4
+  = time_ago_in_words(@message.created_at)
+  ago
+
+= link_to 'Edit', edit_message_path(@message)
+\|
+= link_to 'Back', messages_path

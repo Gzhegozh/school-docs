@@ -30,9 +30,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 gem 'rolify'
 gem 'carrierwave'
-
+gem 'mailboxer'
+gem 'simple_form'
 gem 'gretel'
-
 gem 'factory_girl_rails'
 gem 'figaro'
 

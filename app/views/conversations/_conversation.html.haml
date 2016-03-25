@@ -1,0 +1,32 @@
+= content_tag_for(:tr, conversation) do |conversation|
+  %td
+    .ckbox
+      %input{type: "checkbox", id: "checkbox"}
+      %label{for: "checkbox1"}
+  %td
+    - if conversation.is_completely_trashed?(current_user)
+      %a{href: "javascript:;", class: "trash"}
+        %i.glyphicon.glyphicon-trash
+    -else
+      %a{href: "javascript:;", class: "star"}
+        %i.glyphicon.glyphicon-star
+  %td
+    - conversation.recipients.each do |recipient|
+      - unless recipient.profile.nil?
+        = recipient.profile.name
+      - else 
+        = recipient.email
+  %td
+    = link_to conversation.subject, conversation_path(conversation)
+
+  - if conversation.is_completely_trashed?(current_user)
+    %td
+      = link_to 'Untrash', untrash_conversation_path(conversation), method: :post
+    %td
+      = link_to 'Delete from trash', delete_from_trash_conversation_path(conversation), method: :post
+  - else
+    %td
+      = link_to 'Move to trash', trash_conversation_path(conversation), method: :post
+  %td
+    = time_ago_in_words(conversation.updated_at)
+    ago
