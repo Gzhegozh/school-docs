@@ -1,9 +1,20 @@
-= form_for @school do |f|
-  .col-lg-6
-    .form-group
-      = f.label :name, class: 'control-label col-lg-1', style: 'text-align: left'
-      = f.text_field :name, class: 'form-control', required: true
-      = f.hidden_field :school_group_id, value: params[:school_group_id]
-    .form-group
-      = f.submit nil,class: 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), school_groups_path, :class => 'btn btn-default'
+- if current_page?(new_school_group_school_path)
+  = form_for @school, url: school_group_schools_path(@school_group, @school) do |f|
+    .col-lg-6
+      .form-group
+        = f.label :name, class: 'control-label col-lg-1', style: 'text-align: left'
+        = f.text_field :name, class: 'form-control', required: true
+        = f.hidden_field :school_group_id, value: params[:school_group_id]
+      .form-group
+        = f.submit nil, class: 'btn btn-primary'
+        = link_to t('.cancel', :default => t("helpers.links.cancel")), school_group_path(@school_group.id), :class => 'btn btn-default'
+- else
+  = form_for @school, url: school_group_school_path(@school_group, @school) do |f|
+    .col-lg-6
+      .form-group
+        = f.label :name, class: 'control-label col-lg-1', style: 'text-align: left'
+        = f.text_field :name, class: 'form-control', required: true
+        = f.hidden_field :school_group_id, value: params[:school_group_id]
+      .form-group
+        = f.submit nil, class: 'btn btn-primary'
+        = link_to t('.cancel', :default => t("helpers.links.cancel")), school_group_path(@school_group.id), :class => 'btn btn-default'

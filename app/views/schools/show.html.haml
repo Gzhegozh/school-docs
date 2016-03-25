@@ -1,3 +1,4 @@
+- breadcrumb :school, @school
 .col-md-12
   %h2
     = @school.name
@@ -39,20 +40,30 @@
     /      %span.sr-only 60% Complete
     /    %span.progress-type HTML / HTML5
     /    %span.progress-completed 60%
-  %h2 Grades and activities
-  .list-group
-    .list-group-item
-      .list-group-item-heading
-        %h4 Активити один
-      .list-group-item-text Описание активити один
-    .list-group-item
-      .list-group-item-heading
-        %h4 Активити два
-      .list-group-item-text Описание активити два
-    .list-group-item
-      .list-group-item-heading
-        %h4 Активити три
-      .list-group-item-text Описание активити три
-
-  = link_to 'Edit', edit_school_path(@school), class: 'btn btn-primary'
-  = link_to 'Back', school_groups_path
+  .col-md-10
+    %h2 Grades and activities
+    .panel.panel-default.panel-table
+      .panel-heading
+        .row
+          .col.col-xs-6
+            .h3{class: 'panel-title'}
+              Edit grades and activities below
+          .col.col-xs-6.text-right
+            = link_to 'New Grade or Activity', new_school_group_path(@school.school_group), class: 'btn btn-sm btn-primary'
+      .panel-body
+        - if !@school.grades.blank?
+          .list-group
+            - @school.grades each do |gr|
+              .list-group-item
+                .list-group-item-heading
+                  %h4
+                    = gr.name
+                .list-group-item-text
+                  sjkdfhjf
+        - else
+          %br
+          .alert.alert-warning
+            There is no grades or activities yet but you may create one!
+  .col.col-lg-7
+    = link_to 'Edit', edit_school_group_school_path(@school, school_group_id: @school.school_group_id), class: 'btn btn-primary'
+    = link_to 'Back', school_group_path(@school.school_group.id)

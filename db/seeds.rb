@@ -49,15 +49,5 @@ end
 end
 
 
-['admin1@gmail.com','admin2@gmail.com','admin3@gmail.com','admin4@gmail.com'].each do |email|
-  unless User.exists?(email: email)
-    user = User.new(
-        email: email,
-        password: '12345678',
-        password_confirmation: '12345678'
-    )
-    user.add_role 'admin', SchoolGroup.last
-    user.save
-  end
-end
+
 
