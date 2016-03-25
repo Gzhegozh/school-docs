@@ -9,4 +9,14 @@ class User < ActiveRecord::Base
 
   has_many :grades, through: :enrollments
   has_many :enrollments
+
+  acts_as_messageable
+
+  def name
+    email
+  end
+
+  def mailboxer_email(object)
+    email
+  end
 end

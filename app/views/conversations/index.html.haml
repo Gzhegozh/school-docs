@@ -1,0 +1,31 @@
+%h1 Conversations
+%ul.nav.nav-tabs#myTabs
+  %li{role: "presentation", class: "active"}
+    %a{href: "#inbox", "aria-controls" => "inbox", role: "tab", "data-toggle" => "tab"}
+      Inbox
+  %li{role: "presentation"}
+    %a{href: "#sentbox", "aria-controls" => "sentbox", role: "tab", "data-toggle" => "tab"}
+      Sentbox
+  %li{role: "presentation"}
+    %a{href: "#trash", "aria-controls" => "trash", role: "tab", "data-toggle" => "tab"}
+      Trash
+/ %h2 Inbox
+/ %ul= render collection: mailbox.inbox, partial: 'conversation'
+/ %h2 Sentbox
+/ %ul= render collection: mailbox.sentbox, partial: 'conversation'
+/ %h2 Trash
+/ %ul= render collection: mailbox.trash, partial: 'conversation'
+.tab-content
+  %div{role: "tabpanel", class: "tab-pane active", id: "inbox"}
+    %table.table.table-filter
+      = render collection: mailbox.inbox, partial: 'conversation'
+  %div{role: "tabpanel", class: "tab-pane fade", id: "sentbox"}
+    %table.table.table-filter
+      = render collection: mailbox.sentbox, partial: 'conversation'
+  %div{role: "tabpanel", class: "tab-pane fade", id: "trash"}
+    %table.table.table-filter
+      = render collection: mailbox.trash, partial: 'conversation'
+
+%br
+= link_to 'Start Conversation', :new_conversation, class: "btn btn-primary"
+
