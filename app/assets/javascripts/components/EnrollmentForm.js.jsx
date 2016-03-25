@@ -15,6 +15,7 @@ class EnrollmentForm extends React.Component {
                 <FormMenu items={ this.props.items }
                           clicked={ this.state.clicked }
                           onIndexChange={ this.indexChange.bind(this) } />
+                <BasicsPage/>
             </div>
         )
     }
