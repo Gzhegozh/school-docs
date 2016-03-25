@@ -58,7 +58,7 @@ class SchoolGroupsController < ApplicationController
   def destroy
     @school_group.destroy
     respond_to do |format|
-      format.html { redirect_to school_groups_url, notice: 'School group was successfully destroyed.' }
+      format.html { redirect_to @school_group, notice: 'School group was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
