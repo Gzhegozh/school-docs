@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 = form_for :message, url: reply_conversation_path(conversation) do |f|
   .panel.panel-default
     .panel-heading.clearfix
@@ -18,28 +17,3 @@
       .col-sm-8.col-md-8
         .form-actions
           = f.button 'Send', class: 'btn btn-primary'          
-	
-=======
-= form_for @message do |f|
-  - if @message.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@message.errors.count, "error")} prohibited this message from being saved:"
-      %ul
-        - @message.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :subject
-    %br/
-    = f.text_area :subject, autofocus: true
-  .field
-    = f.label :body
-    %br/
-    = f.text_area :body
-  %br/
-  .field
-    %h4
-      Receiver    
-    = f.text_field :receiver_id
-  .actions
-    = f.submit 'Save'
->>>>>>> a9dc60c9f416160e635b624739b92d0ea1177f68
