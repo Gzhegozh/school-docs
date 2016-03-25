@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {registrations: 'user/registrations', 
                                       sessions: 'user/sessions',
                                       passwords: 'user/passwords'}
+<<<<<<< HEAD
 
   get 'schools/new/:school_group_id' => 'schools#new'
   post 'admin/set_admin/:id/' => 'admin#set_admin'
@@ -18,4 +19,7 @@ Rails.application.routes.draw do
       post :delete_from_trash
     end
   end
+=======
+  resources :messages
+>>>>>>> a9dc60c9f416160e635b624739b92d0ea1177f68
 end
