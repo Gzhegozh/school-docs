@@ -1,0 +1,20 @@
+= form_for :message, url: reply_conversation_path(conversation) do |f|
+  .panel.panel-default
+    .panel-heading.clearfix
+      %h3.panel-title
+        New message
+    .panel-body
+      .col-sm-8.col-md-8
+        .form_group
+          = f.label 'Subject', class: "col-sm-2"
+          .col-sm-10
+            = f.text_field :subject, class: "form-control counted", placeholder: "Subject", require: true
+      .col-sm-6.col-md-8
+        .form_group
+          = f.label 'Message', class: "col-sm-12"
+          .col-sm-12
+            = f.text_area :body, class: "form-control counted", placeholder: "Type in your message", rows: "5", style: "margin-bottom:18px;", require: true
+      .col-sm-8.col-md-8
+        .form-actions
+          = f.button 'Send', class: 'btn btn-primary'          
+	
