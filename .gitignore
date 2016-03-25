@@ -4,6 +4,8 @@
 /tmp
 /public
 /config/database.yml
-/config/secrets.yml
 /.idea
 /vendor/bundle
+# Ignore application configuration
+/config/application.yml
+.env
