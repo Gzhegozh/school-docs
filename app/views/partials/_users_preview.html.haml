@@ -39,5 +39,3 @@
                   = f.hidden_field :id, value: user.id
                   = f.hidden_field :school_group_id, value: params[:id]
                   = f.submit 'Choose', class: 'btn btn-sm btn-primary', style: 'display: inline'
-            - if current_user.has_role? "super_admin"
-              = link_to 'Edit profile', edit_user_registration_path, style: 'margin-left: 5px'
