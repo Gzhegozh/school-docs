@@ -1,4 +1,4 @@
-class ExtraPage extends React.Component {
+class ExtraSection extends React.Component {
     constructor(props){
         super(props);
     }

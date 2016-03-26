@@ -1,4 +1,4 @@
-class BasicsPage extends React.Component {
+class BasicsSection extends React.Component {
     constructor(props){
         super(props);
     }

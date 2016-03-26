@@ -15,6 +15,21 @@ class EnrollmentForm extends React.Component {
         if( index < length-1)
             this.setState({clicked: this.items.indexOf(this.items[index + 1]) || this.state.clicked});
     }
+
+    getProgress(){
+        return ( this.state.clicked + 1).toString() + '/' + this.items.length.toString() + ' ';
+    }
+
+    nextButtonLabel(){
+        var index = this.state.clicked +1;
+
+        if(index != this.items.length) {
+            return 'Next section →';
+        } else {
+            return 'Save ✓';
+        }
+    }
+
     render(){
         return (
             <div>
@@ -33,7 +48,7 @@ class EnrollmentForm extends React.Component {
                     </div>
                     <div className="col-md-2">
                         <a href='#' className="btn btn-success" onClick={ this.clickNextButton.bind(this) }>
-                            Next section &rarr;
+                            {this.getProgress() + this.nextButtonLabel()}
                         </a>
                     </div>
                 </div>
@@ -45,17 +60,19 @@ class EnrollmentForm extends React.Component {
     renderSection(item){
         switch (item){
             case 'Basics':
-                return (<BasicsPage/>);
+                return (<BasicsSection/>);
+            case 'Contacts':
+                return (<ContactsSection/>);
             case 'Extra':
-                return (<ExtraPage/>);
+                return (<ExtraSection/>);
             case 'Medications':
-                return (<MedicationsPage/>);
+                return (<MedicationsSection/>);
+            case 'Allergies':
+                return (<AllergiesSection/>);
+            case 'Questionnaire':
+                return (<QuestionnaireSection/>);
             default:
                 return (<ErrorPage/>);
         }
-    }
-
-    renderBasics(){
-        <BasicsPage/>
     }
 }
