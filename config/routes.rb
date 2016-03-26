@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :school_groups do
-    resources :schools
+    resources :schools do
+      resources :grades
+    end
   end
 
   resources :enrollment_form

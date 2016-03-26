@@ -11,6 +11,11 @@ crumb :school do |school|
   link school.name, school_group_school_path
   parent school.school_group
 end
+
+crumb :grade do |grade|
+  link grade.name, school_group_school_grade_path
+  parent grade.school
+end
 # # Issue list
 # crumb :issues do
 #   link "All issues", school_groups_path
