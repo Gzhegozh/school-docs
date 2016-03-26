@@ -16,7 +16,7 @@
           .col-xs-10.col-md-11
             %div
               %h5
-                - unless message.sender.profile.nil?
+                - unless message.sender.profile.name.nil?
                   = message.sender.profile.name
                 - else 
                   = message.sender.email
