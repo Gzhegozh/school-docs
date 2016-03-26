@@ -6,9 +6,9 @@ class Question extends React.Component {
     render(){
         return (
             <div className="row">
-                <div className="col-lg-4">
+                <label className="col-lg-4 control-label">
                     You are awesome?
-                </div>
+                </label>
                 <div className="col-lg-8">
                     <input type="text" className="form-control" ref={ (ref) => this.answer = ref }/>
                 </div>
