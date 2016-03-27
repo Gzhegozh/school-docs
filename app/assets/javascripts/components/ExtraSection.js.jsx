@@ -5,7 +5,6 @@ class ExtraSection extends React.Component {
 
     componentDidMount(){
         props = this.props;
-        console.log(props);
         if(props.values){
             this.person.value = props.values.person;
             this.contacts.value = props.values.contacts;
