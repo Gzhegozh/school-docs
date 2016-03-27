@@ -5,8 +5,6 @@ class BasicsSection extends React.Component {
 
     infoFromProfile(e){
         e.preventDefault();
-        alert(this.birthday.value);
-        this.birthday.value = '2016-03-12';
     }
 
     componentDidMount(){

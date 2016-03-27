@@ -92,6 +92,7 @@ class EnrollmentForm extends React.Component {
             case 'Questionnaire':
                 return (<QuestionnaireSection updateData={ this.updateSectionData.bind(this) }
                                               values={ this.data.Questionnaire }
+                                              questions={ this.props.questions }
                 />);
             default:
                 return (<ErrorPage/>);

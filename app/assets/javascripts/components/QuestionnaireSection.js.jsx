@@ -3,6 +3,23 @@ class QuestionnaireSection extends React.Component {
         super(props);
     }
 
+    updateAnswer(question, answer){
+        this.answers[question] = answer;
+        var data = {};
+        data.type = 'Questionnaire';
+        data.answers = this.answers;
+        this.props.updateData(data);
+    }
+
+    componentWillMount(){
+        props = this.props;
+        if(props.values){
+            this.answers = props.values.answers;
+        } else {
+            this.answers = {};
+        }
+    }
+
     render(){
         return (
             <div>
@@ -13,8 +30,13 @@ class QuestionnaireSection extends React.Component {
                     </small>
                 </h4>
                 <hr/>
-                <Question/>
-                <br/>
+                {this.props.questions.map((question, index) => {
+                    return <Question title={question}
+                                     answer={ this.answers[question] }
+                                     updateAnswer={ this.updateAnswer.bind(this) }
+                                     key={index}
+                    />
+                })}
             </div>
         );
     }
