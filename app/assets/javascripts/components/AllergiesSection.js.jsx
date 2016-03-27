@@ -1,6 +1,7 @@
 class AllergiesSection extends React.Component {
     constructor(props){
         super(props);
+        this.state = {alls: []}
     }
 
     printAllergies(){
@@ -9,6 +10,9 @@ class AllergiesSection extends React.Component {
 
     addNewAllergy(e){
         e.preventDefault();
+        var alls = this.state.alls;
+        alls.push(1);
+        this.setState({alls: alls});
     }
 
     render(){
@@ -21,7 +25,9 @@ class AllergiesSection extends React.Component {
                   </small>
               </h4>
               <hr/>
-              {this.printAllergies()}
+              {this.state.alls.map((item,index) => {
+                  return <Allergy/>;
+              })}
               <div>
                   <a href="#" className="btn btn-primary" onClick={ this.addNewAllergy.bind(this) }>
                     <i className="fa fa-fw fa-plus"/>
