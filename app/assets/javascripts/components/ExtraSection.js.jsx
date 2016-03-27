@@ -7,6 +7,11 @@ class ExtraSection extends React.Component {
         return (
           <div>
             <h3>Emergency contacts</h3>
+            <h4>
+                <small>
+                    If main contacts will unavailable
+                </small>
+            </h4>
             <hr/>
             <div className="row">
                 <div className="form-group">

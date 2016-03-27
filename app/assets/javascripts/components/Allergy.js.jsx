@@ -5,7 +5,13 @@ class Allergy extends React.Component {
 
     render(){
         return (
-            <input className="form-control" type="text" ref={ (ref) => this.target = ref }/>
+            <div>
+                <input className="form-control"
+                       type="text"
+                       placeholder="Target"
+                       ref={ (ref) => this.target = ref }/>
+                <br/>
+            </div>
         );
     }
 }
