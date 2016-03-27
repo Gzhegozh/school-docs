@@ -1,4 +1,8 @@
+require 'carrierwave/orm/activerecord'
+
+
 class Grade < ActiveRecord::Base
+  mount_uploader :certificate_template_path, CertificateTemplateUploader
   belongs_to :school
 
   has_many :users, through: :enrollments

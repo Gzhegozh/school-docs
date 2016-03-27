@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323174918) do
+ActiveRecord::Schema.define(version: 20160326082821) do
 
   create_table "allergies", force: :cascade do |t|
     t.string   "target",                      limit: 255
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20160323174918) do
 
   create_table "grades", force: :cascade do |t|
     t.string   "name",                      limit: 255
-    t.string   "dscription",                limit: 255
+    t.string   "description",               limit: 255
     t.string   "certificate_template_path", limit: 255
     t.integer  "school_id",                 limit: 4
     t.datetime "created_at",                            null: false
