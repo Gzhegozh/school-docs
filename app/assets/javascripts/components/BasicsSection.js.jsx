@@ -1,12 +1,25 @@
-class BasicsPage extends React.Component {
+class BasicsSection extends React.Component {
     constructor(props){
         super(props);
     }
 
+    infoFromProfile(e){
+        e.preventDefault();
+        alert(this);
+    }
+
     render(){
+        console.log(this);
         return (
           <div>
               <h3>This is basic info about enrolling student</h3>
+              <h4>
+                  <small>
+                      You can
+                      <a href="#" onClick={ this.infoFromProfile.bind(this) }> import </a>
+                      this information from his profile
+                  </small>
+              </h4>
               <hr/>
               <div className="row">
                   <div className="form-group">
