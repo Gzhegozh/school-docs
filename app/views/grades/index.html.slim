@@ -1,0 +1,27 @@
+h1 Listing grades
+
+table
+  thead
+    tr
+      th Name
+      th Description
+      th Certificate template path
+      th School
+      th
+      th
+      th
+
+  tbody
+    - @grades.each do |grade|
+      tr
+        td = grade.name
+        td = grade.description
+        td = grade.certificate_template_path
+        td = grade.school
+        td = link_to 'Show', grade
+        td = link_to 'Edit', edit_grade_path(grade)
+        td = link_to 'Destroy', grade, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Grade', new_grade_path

@@ -1,0 +1,9 @@
+- breadcrumb :grade, @grade
+h1 Editing grade
+
+== render 'form'
+
+br
+= link_to 'Show', school_group_school_grade_path(@grade.school.school_group, @grade.school, @grade), class: 'btn btn-primary'
+= link_to 'Back', school_group_school_path(@grade.school.school_group, @grade.school)
+

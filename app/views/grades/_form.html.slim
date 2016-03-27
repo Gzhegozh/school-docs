@@ -1,0 +1,12 @@
+= simple_form_for([@grade.school.school_group, @grade.school, @grade]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :description
+    = f.input :certificate_template_path
+    = f.hidden_field :certificate_template_path_cache
+    /= f.association :school
+
+  .form-actions
+    = f.button :submit

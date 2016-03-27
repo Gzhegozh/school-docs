@@ -4,6 +4,10 @@
       = link_to root_path do
         %i.fa.fa-fw.fa-dashboard
         Dashboard
+    %li
+      = link_to conversations_path do
+        %i.fa.fa-fw.fa-envelope
+        Messages
     - if current_user.has_role? 'student'
       = render :partial => 'layouts/students_sidebar'
     - if current_user.has_role? 'parent'

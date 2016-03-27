@@ -35,6 +35,8 @@ gem 'simple_form'
 gem 'gretel'
 gem 'factory_girl_rails'
 gem 'figaro'
+gem 'will_paginate', '~> 3.0.6'
+
 
 group :development, :test do
   gem 'byebug'
