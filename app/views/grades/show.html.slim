@@ -1,0 +1,38 @@
+- breadcrumb :grade, @grade
+p#notice = notice
+
+- if @students.empty?
+  h3
+    | There are no students in this grade yet
+- else
+  h3
+    | List of students:
+  table.table
+    thead
+      tr
+        th
+          | Firstname
+        th
+          | Lastname
+        th
+          | Email
+        th
+          | Registred
+    tbody
+      - @students.each do |student|
+        tr
+          td
+            = student.profile.name || ' - '
+          td
+            = student.profile.last_name || ' - '
+          td
+            = student.email
+          td
+            | todo
+= link_to 'Add students', choose_students_school_group_school_grade_path(@grade.school.school_group, @grade.school, @grade), class: 'btn btn-primary'
+
+| To do: import csv
+br
+br
+= link_to 'Edit', edit_school_group_school_grade_path(@grade.school.school_group, @grade.school, @grade), class: 'btn btn-primary'
+= link_to 'Back', school_group_school_path(@grade.school.school_group, @grade.school)

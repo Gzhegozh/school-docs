@@ -4,13 +4,17 @@
       = link_to root_path do
         %i.fa.fa-fw.fa-dashboard
         Dashboard
+    %li
+      = link_to conversations_path do
+        %i.fa.fa-fw.fa-envelope
+        Messages
     - if current_user.has_role? 'student'
       = render :partial => 'layouts/students_sidebar'
-    - elsif current_user.has_role? 'parent'
+    - if current_user.has_role? 'parent'
       = render :partial => 'layouts/parents_sidebar'
-    - elsif current_user.has_role? 'admin'
+    - if SchoolGroup.with_role('admin', current_user).to_a.size > 0
       = render :partial => 'layouts/admins_sidebar'
-    - elsif current_user.has_role? 'super_admin'
+    - if current_user.has_role? 'super_admin'
       = render :partial => 'layouts/super_admins_sidebar'
     /%li.active
     /  = link_to root_path do

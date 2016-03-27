@@ -40,7 +40,7 @@
     /      %span.sr-only 60% Complete
     /    %span.progress-type HTML / HTML5
     /    %span.progress-completed 60%
-  .col-md-10
+  .col-md-12
     %h2 Grades and activities
     .panel.panel-default.panel-table
       .panel-heading
@@ -49,17 +49,17 @@
             .h3{class: 'panel-title'}
               Edit grades and activities below
           .col.col-xs-6.text-right
-            = link_to 'New Grade or Activity', new_school_group_path(@school.school_group), class: 'btn btn-sm btn-primary'
+            = link_to 'New Grade or Activity', new_school_group_school_grade_path(@school.school_group, @school), class: 'btn btn-sm btn-primary'
       .panel-body
         - if !@school.grades.blank?
-          .list-group
-            - @school.grades each do |gr|
-              .list-group-item
+          .list-group{style: 'margin-bottom: 0;'}
+            - @school.grades.each do |gr|
+              = link_to school_group_school_grade_path(gr.school.school_group, gr.school, gr), class: 'list-group-item' do
                 .list-group-item-heading
                   %h4
                     = gr.name
                 .list-group-item-text
-                  sjkdfhjf
+                  = gr.description
         - else
           %br
           .alert.alert-warning
