@@ -8,13 +8,23 @@ crumb :school_group do |school_group|
 end
 
 crumb :school do |school|
-  link school.name, school_group_school_path
+  link school.name, school_group_school_path(school.school_group, school)
   parent school.school_group
 end
 
 crumb :grade do |grade|
-  link grade.name, school_group_school_grade_path
+  link grade.name, school_group_school_grade_path(grade.school.school_group, grade.school, grade)
   parent grade.school
+end
+
+crumb :new_grade do |school|
+  link 'new grade'
+  parent school
+end
+
+crumb :choose_students do |grade|
+  link 'choose students'
+  parent grade
 end
 # # Issue list
 # crumb :issues do

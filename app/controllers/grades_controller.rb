@@ -1,5 +1,5 @@
 class GradesController < ApplicationController
-  before_action :set_grade, only: [:show, :edit, :update, :destroy]
+  before_action :set_grade, only: [:show, :edit, :update, :destroy, :choose_students, :add_student, :delete_student]
   before_action :set_school, only: [:new, :create, :update, :destroy]
   # GET /grades
   # GET /grades.json
@@ -62,6 +62,23 @@ class GradesController < ApplicationController
     end
   end
 
+  def choose_students
+    @students = User.includes(:profile).includes(:enrollments).with_role('student').paginate(:page => params[:page], :per_page => 5)
+  end
+
+  def add_student
+    @student = User.find(params[:student_id])
+    unless @grade.users.exists? @student
+      @grade.users << @student
+    end
+    render :json => {status: :ok}
+  end
+
+  def delete_student
+    @student = User.find(params[:student_id])
+    @grade.enrollments.where(user: @student).first.destroy
+    render :json => {status: :ok}
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_grade

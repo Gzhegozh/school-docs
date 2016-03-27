@@ -2,9 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-window.graphDrawed = false
+#window.graphDrawed = false
 $(document).on "page:change", ->
-
   el = document.getElementById('graph')
   # get canvas
   options =
@@ -19,7 +18,8 @@ $(document).on "page:change", ->
     G_vmlCanvasManager.initElement canvas
   ctx = canvas.getContext('2d')
   canvas.width = canvas.height = options.size
-  if !window.graphDrawed
+  #if !window.graphDrawed
+  if el.childNodes.length == 0
     el.appendChild span
     el.appendChild canvas
   ctx.translate options.size / 2, options.size / 2
@@ -39,4 +39,4 @@ $(document).on "page:change", ->
 
   drawCircle '#efefef', options.lineWidth, 100 / 100
   drawCircle '#555555', options.lineWidth, options.percent / 100
-  window.graphDrawed = true
+  #window.graphDrawed = true

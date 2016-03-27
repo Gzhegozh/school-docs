@@ -4,7 +4,11 @@ class SchoolGroupsController < ApplicationController
   # GET /school_groups
   # GET /school_groups.json
   def index
-    @school_groups = SchoolGroup.all
+    if current_user.has_role? 'super_admin'
+      @school_groups = SchoolGroup.all
+    else
+      @school_groups = SchoolGroup.with_role('admin', current_user)
+    end
   end
 
   # GET /school_groups/1

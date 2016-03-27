@@ -29,7 +29,10 @@ p#notice = notice
             = student.email
           td
             | todo
-| To do: adding students, import csv, pdf
+= link_to 'Add students', choose_students_school_group_school_grade_path(@grade.school.school_group, @grade.school, @grade), class: 'btn btn-primary'
+
+| To do: import csv
+br
 br
 = link_to 'Edit', edit_school_group_school_grade_path(@grade.school.school_group, @grade.school, @grade), class: 'btn btn-primary'
 = link_to 'Back', school_group_school_path(@grade.school.school_group, @grade.school)
