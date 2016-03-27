@@ -1,14 +1,34 @@
 class MedicationsSection extends React.Component {
     constructor(props){
         super(props);
-        this.state = {meds: []};
+        this.state = {medications: []};
     }
 
     addMedication(e){
         e.preventDefault();
-        var meds = this.state.meds;
-        meds.push(1);
-        this.setState({meds: meds});
+        var meds = this.state.medications;
+        meds.push({name:'', notes: ''});
+        this.setState({medications: meds});
+    }
+
+    updateMedication(medication, index){
+        var data = {};
+        data.type = 'Medications';
+
+        var meds = this.state.medications;
+        meds[index] = medication;
+        this.setState({medications: meds});
+
+        data.medications = meds;
+        this.props.updateData(data);
+        console.log(data);
+    }
+
+    componentWillMount(){
+        props = this.props;
+        if(props.values){
+            this.setState({medications: props.values.medications});
+        }
     }
 
     render(){
@@ -21,8 +41,12 @@ class MedicationsSection extends React.Component {
                 </small>
             </h4>
             <hr/>
-           {this.state.meds.map((item, index) => {
-               return <Medication/>;
+           {this.state.medications.map((medication, index) => {
+               return <Medication onUpdate={ this.updateMedication.bind(this) }
+                                  key={ index }
+                                  medication={ this.state.medications[index] }
+                                  index={ index }
+               />;
            })
            }
             <div>

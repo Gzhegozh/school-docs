@@ -2,18 +2,24 @@ class EnrollmentForm extends React.Component {
     constructor(props){
         super(props);
         this.items = props.items;
+        this.data = {};
         this.state = {clicked: 0};
     }
 
     indexChange(index){
         this.setState({clicked: index})
     }
-    clickNextButton(e){
-        e.preventDefault();
+
+    updateSection(){
         var index = this.state.clicked;
         var length = this.items.length;
         if( index < length-1)
             this.setState({clicked: this.items.indexOf(this.items[index + 1]) || this.state.clicked});
+    }
+    clickNextButton(e){
+        e.preventDefault();
+        this.updateSection();
+
     }
 
     getProgress(){
@@ -28,6 +34,10 @@ class EnrollmentForm extends React.Component {
         } else {
             return 'Save ✓';
         }
+    }
+
+    updateSectionData(data){
+        this.data[data.type] = data;
     }
 
     render(){
@@ -60,17 +70,30 @@ class EnrollmentForm extends React.Component {
     renderSection(item){
         switch (item){
             case 'Basics':
-                return (<BasicsSection/>);
+                return (<BasicsSection updateData={ this.updateSectionData.bind(this) }
+                                       values={ this.data.Basics }
+                />);
             case 'Contacts':
-                return (<ContactsSection/>);
+                return (<ContactsSection updateData={ this.updateSectionData.bind(this) }
+                                         values={ this.data.Contacts }
+                />);
             case 'Extra':
-                return (<ExtraSection/>);
+                return (<ExtraSection updateData={ this.updateSectionData.bind(this) }
+                                      values={ this.data.Extra }
+                />);
             case 'Medications':
-                return (<MedicationsSection/>);
+                return (<MedicationsSection updateData={ this.updateSectionData.bind(this) }
+                                            values={ this.data.Medications }
+                />);
             case 'Allergies':
-                return (<AllergiesSection/>);
+                return (<AllergiesSection updateData={ this.updateSectionData.bind(this) }
+                                          values={ this.data.Allergies }
+                />);
             case 'Questionnaire':
-                return (<QuestionnaireSection/>);
+                return (<QuestionnaireSection updateData={ this.updateSectionData.bind(this) }
+                                              values={ this.data.Questionnaire }
+                                              questions={ this.props.questions }
+                />);
             default:
                 return (<ErrorPage/>);
         }

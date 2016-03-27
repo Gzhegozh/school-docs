@@ -1,18 +1,32 @@
 class AllergiesSection extends React.Component {
     constructor(props){
         super(props);
-        this.state = {alls: []}
-    }
-
-    printAllergies(){
-        return '';
+        this.state = {allergies: []};
     }
 
     addNewAllergy(e){
         e.preventDefault();
-        var alls = this.state.alls;
-        alls.push(1);
-        this.setState({alls: alls});
+        var allergies = this.state.allergies;
+        allergies.push('');
+        this.setState({allergies: allergies});
+    }
+
+    updateAllergy(target, index){
+        var data = {};
+        data.type = 'Allergies';
+        var allergies = this.state.allergies;
+        allergies[index] = target;
+
+        this.setState({allergies: allergies});
+        data.allergies = allergies;
+        this.props.updateData(data);
+    }
+
+    componentWillMount(){
+        props = this.props;
+        if(props.values){
+            this.setState({allergies: props.values.allergies});
+        }
     }
 
     render(){
@@ -25,8 +39,12 @@ class AllergiesSection extends React.Component {
                   </small>
               </h4>
               <hr/>
-              {this.state.alls.map((item,index) => {
-                  return <Allergy/>;
+              {this.state.allergies.map((target, index) => {
+                  return <Allergy updateAllergy={ this.updateAllergy.bind(this) }
+                                  target={this.state.allergies[index]}
+                                  key={ index }
+                                  index={ index }
+                  />;
               })}
               <div>
                   <a href="#" className="btn btn-primary" onClick={ this.addNewAllergy.bind(this) }>

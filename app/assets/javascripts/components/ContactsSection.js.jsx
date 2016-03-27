@@ -8,6 +8,24 @@ class ContactsSection extends React.Component {
         alert('Imported');
     }
 
+    valuesChanged(){
+        var data = {};
+        data.type = 'Contacts';
+        data.phone = this.phone.value;
+        data.skype = this.skype.value;
+        data.email = this.email.value;
+        this.props.updateData(data);
+    }
+
+    componentDidMount(){
+        props = this.props;
+        if(props.values){
+            this.phone.value = props.values.phone;
+            this.skype.value = props.values.skype;
+            this.email.value = props.values.email;
+        }
+    }
+
     render(){
         return (
             <div>
@@ -24,7 +42,11 @@ class ContactsSection extends React.Component {
                         Phone:
                     </label>
                     <div className="col-lg-9">
-                        <input className="form-control" type="text" ref={(ref) => this.phone = ref}/>
+                        <input className="form-control"
+                               type="text"
+                               ref={(ref) => this.phone = ref}
+                               onChange={ this.valuesChanged.bind(this) }
+                        />
                     </div>
                 </div>
                 <br/>
@@ -33,7 +55,11 @@ class ContactsSection extends React.Component {
                         Skype:
                     </label>
                     <div className="col-lg-9">
-                        <input className="form-control" type="text" ref={(ref) => this.skype = ref}/>
+                        <input className="form-control"
+                               type="text"
+                               ref={(ref) => this.skype = ref}
+                               onChange={ this.valuesChanged.bind(this) }
+                        />
                     </div>
                 </div>
                 <br/>
@@ -42,7 +68,11 @@ class ContactsSection extends React.Component {
                         Email:
                     </label>
                     <div className="col-lg-9">
-                        <input className="form-control" type="text" ref={(ref) => this.email = ref}/>
+                        <input className="form-control"
+                               type="text"
+                               ref={(ref) => this.email = ref}
+                               onChange={ this.valuesChanged.bind(this) }
+                        />
                     </div>
                 </div>
                 <br/>
