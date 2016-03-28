@@ -1,0 +1,7 @@
+.col-lg-6
+  %br
+  = form_tag url_for(), class: "form-inline", method: :get do
+    .input-group.input-group-md{style: 'width: 80%'}
+      = text_field_tag :query, params[:query], class: "form-control", id: "search", autocomplete: "off"
+      .input-group-btn
+        = submit_tag "Search", class: "btn btn-primary"

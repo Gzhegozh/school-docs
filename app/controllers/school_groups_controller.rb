@@ -1,11 +1,16 @@
 class SchoolGroupsController < ApplicationController
   before_action :set_school_group, only: [:show, :edit, :update, :destroy]
+  include Elasticsearch::Model::Response::Pagination::WillPaginate
 
   # GET /school_groups
   # GET /school_groups.json
   def index
     if current_user.has_role? 'super_admin'
-      @school_groups = SchoolGroup.paginate(:page => params[:page], :per_page => 10)
+      if params[:query].blank?
+        @school_groups = SchoolGroup.paginate(:page => params[:page], :per_page => 10)
+      else
+        @school_groups = SchoolGroup.search(params[:query], :page => params[:page], :per_page => 10)
+      end
     else
       @school_groups = SchoolGroup.with_role('admin', current_user)
     end
@@ -76,6 +81,6 @@ class SchoolGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_group_params
-      params.require(:school_group).permit(:name, :page)
+      params.require(:school_group).permit(:name, :page, :query)
     end
 end

@@ -47,6 +47,7 @@
               = bootstrap_flash
           .row
             .col-lg-12
-              = breadcrumbs separator: " &rsaquo; ", style: :bootstrap, semantic: true, class: 'breadcrumb-arrow'
+              .col-lg-12
+                = breadcrumbs separator: " &rsaquo; ", style: :bootstrap, semantic: true, class: 'breadcrumb-arrow'
               = yield
 
