@@ -35,6 +35,9 @@ class QuestionnaireSection extends React.Component {
             this.answers = props.values.answers;
         } else {
             this.answers = {};
+            this.props.questions.map((question, index) => {
+                this.answers[question] = '';
+            });
         }
     }
 
