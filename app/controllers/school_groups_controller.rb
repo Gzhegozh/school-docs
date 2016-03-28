@@ -1,6 +1,5 @@
 class SchoolGroupsController < ApplicationController
   before_action :set_school_group, only: [:show, :edit, :update, :destroy]
-  include Elasticsearch::Model::Response::Pagination::WillPaginate
 
   # GET /school_groups
   # GET /school_groups.json
@@ -9,7 +8,7 @@ class SchoolGroupsController < ApplicationController
       if params[:query].blank?
         @school_groups = SchoolGroup.paginate(:page => params[:page], :per_page => 10)
       else
-        @school_groups = SchoolGroup.search(params[:query], :page => params[:page], :per_page => 10)
+        @school_groups = SchoolGroup.search(params[:query]).paginate(:page => params[:page], :per_page => 10)
       end
     else
       @school_groups = SchoolGroup.with_role('admin', current_user)

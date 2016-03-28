@@ -2,6 +2,7 @@ class SchoolGroup < ActiveRecord::Base
   has_many :schools
   resourcify
   include Elasticsearch::Model
+  include Elasticsearch::Model::Response::Pagination::WillPaginate
 
   def as_indexed_json(options={})
     self.as_json(
@@ -44,7 +45,7 @@ class SchoolGroup < ActiveRecord::Base
         query: {query_string: {query: query}},
         size: 20
     )
-    es.records.to_a
+    es.records
 
     # if es.count
     #   return search_id_db(params)
