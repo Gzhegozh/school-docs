@@ -9,12 +9,15 @@ class AllergiesSection extends React.Component {
         var allergies = this.state.allergies;
         allergies.push('');
         this.setState({allergies: allergies});
+        this.props.updatePercentage(data.type, this.calculatePercentage());
     }
 
     calculatePercentage(){
         var count = 0;
+        if(this.state.allergies.length == 0)
+            return 1;
         this.state.allergies.map((item) => {
-            if(item)
+            if(item && (item != ''))
                 count += 1;
         });
         return (count / this.state.allergies.length);
@@ -37,6 +40,7 @@ class AllergiesSection extends React.Component {
         if(props.values){
             this.setState({allergies: props.values.allergies});
         }
+        this.props.updatePercentage('Allergies', this.calculatePercentage());
     }
 
     render(){
