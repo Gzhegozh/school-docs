@@ -1,4 +1,4 @@
-class Signature extends React.Component {
+class SignatureSection extends React.Component {
     constructor(props){
         super(props);
     }
@@ -19,6 +19,14 @@ class Signature extends React.Component {
         }
     }
 
+    calculatePercentage(){
+        var count = 0;
+        if($('#sign').jSignature('getData', 'base30')[1])
+            count += 1;
+        return count;
+        console.log(count);
+    }
+
     getSignData(e){
         e.preventDefault();
         this.sign = $('#sign').jSignature("getData", "base30");
@@ -27,6 +35,7 @@ class Signature extends React.Component {
         data.type = 'Signature';
         data.signature = $('#sign').jSignature("getData", "base30");
         this.props.updateData(data);
+        this.props.updatePercentage(data.type, this.calculatePercentage())
     }
 
 

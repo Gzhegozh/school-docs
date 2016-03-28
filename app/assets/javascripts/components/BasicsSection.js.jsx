@@ -7,6 +7,19 @@ class BasicsSection extends React.Component {
         e.preventDefault();
     }
 
+    calculatePercentage(){
+        var count = 0;
+        if(this.name.value)
+            count += 1;
+        if(this.last_name.value)
+            count += 1;
+        if(this.middle_name.value)
+            count += 1;
+        if(this.birthday.value)
+            count += 1;
+        return (count / 4);
+    }
+
     componentDidMount(){
         props = this.props;
         if(props.values) {
@@ -25,6 +38,7 @@ class BasicsSection extends React.Component {
         data.middle_name = this.middle_name.value;
         data.birthday = this.birthday.value;
         this.props.updateData(data);
+        this.props.updatePercentage(data.type, this.calculatePercentage());
     }
 
     render(){
