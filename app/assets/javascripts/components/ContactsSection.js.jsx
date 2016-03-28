@@ -15,6 +15,18 @@ class ContactsSection extends React.Component {
         data.skype = this.skype.value;
         data.email = this.email.value;
         this.props.updateData(data);
+        this.props.updatePercentage(data.type, this.calculatePercentage());
+    }
+
+    calculatePercentage(){
+        var count = 0;
+        if(this.phone.value)
+            count += 1;
+        if(this.skype.value)
+            count += 1;
+        if(this.email.value)
+            count += 1;
+        return count / 3;
     }
 
     componentDidMount(){
