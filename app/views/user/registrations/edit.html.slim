@@ -9,7 +9,7 @@
       .col-md-4.col-sm-6.col-xs-12
         = f.fields_for :profile do |profile_form|
           .text-center
-            = image_tag(current_user.profile.avatar.url, class: 'avatar img-circle img-thumbnail', alt: 'avatar')
+            = image_tag(current_user.profile.avatar.url, class: 'avatar img-circle img-thumbnail', alt: 'avatar', id: 'preview')
             h6
               = t('.upload_a_different_photo') + '...'
               = profile_form.file_field(:avatar, class: 'text-center center-block well well-sm')

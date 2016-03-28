@@ -8,3 +8,4 @@
     Choose an administrator for school group
   - if !@users.blank?
     = render partial: 'partials/users_preview', collection: @users, as: :user
+  = will_paginate @users

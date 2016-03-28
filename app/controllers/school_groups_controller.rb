@@ -5,7 +5,7 @@ class SchoolGroupsController < ApplicationController
   # GET /school_groups.json
   def index
     if current_user.has_role? 'super_admin'
-      @school_groups = SchoolGroup.all
+      @school_groups = SchoolGroup.paginate(:page => params[:page], :per_page => 10)
     else
       @school_groups = SchoolGroup.with_role('admin', current_user)
     end
@@ -15,6 +15,7 @@ class SchoolGroupsController < ApplicationController
   # GET /school_groups/1.json
   def show
     @admin = User.with_role(:admin, @school_group)
+    @schools = @school_group.schools.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /school_groups/new
@@ -24,7 +25,7 @@ class SchoolGroupsController < ApplicationController
 
   # GET /school_groups/1/edit
   def edit
-    @users = User.all
+    @users = User.paginate(:page => params[:page], :per_page => 5)
   end
 
   # POST /school_groups
@@ -75,6 +76,6 @@ class SchoolGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_group_params
-      params.require(:school_group).permit(:name)
+      params.require(:school_group).permit(:name, :page)
     end
 end
