@@ -1,31 +1,11 @@
-.panel.panel-default.widget
+.panel.panel-default.widget#all_messages{ "data-id" => "#{conversation.id}"}
   .panel-heading
     %span.glyphicon.glyphicon-comment
     %h3.panel-title
       = conversation.subject
   .panel-body
     %ul.list-group
-      = content_tag_for(:li, conversation.receipts_for(current_user), class: "list-group-item") do|receipt|
-        - message = receipt.message
-        .row
-          .col-xs-2.col-md-1         
-            - unless message.sender.profile.nil? || message.sender.profile.avatar.nil?
-              = image_tag(message.sender.profile.avatar.url, class: 'avatar img-thumbnail', alt: 'avatar', width: "50px")
-            - else
-              = image_tag(image_path('default.png'), class: 'avatar img-thumbnail', alt: 'avatar', width: "50px")
-          .col-xs-10.col-md-11
-            %div
-              %h5
-                - unless message.sender.profile.name.nil?
-                  = message.sender.profile.name
-                - else 
-                  = message.sender.email
-              .mic-info
-                = message.created_at.strftime("on %m %b %Y")
-              %br
-            .comment-text
-              = message.body
-          %br
+      = render 'conversations/receipts', receipts: @receipts
 
 = render 'messages/form', conversation: conversation
 

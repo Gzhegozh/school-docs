@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post :trash
       post :untrash
       post :delete_from_trash
+      get  :chat   
     end
   end
 end
