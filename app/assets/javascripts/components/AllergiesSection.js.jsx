@@ -48,7 +48,7 @@ class AllergiesSection extends React.Component {
                       If your child haven't allergies, ignore this section
                   </small>
               </h4>
-              <hr/>
+              <br/>
               {this.state.allergies.map((target, index) => {
                   return <Allergy updateAllergy={ this.updateAllergy.bind(this) }
                                   target={this.state.allergies[index]}

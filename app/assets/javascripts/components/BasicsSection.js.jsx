@@ -58,6 +58,7 @@ class BasicsSection extends React.Component {
                       <label className="col-md-2 control-label"> Enter name: </label>
                       <div className="col-md-10">
                           <input className="form-control"
+                                 placeholder="Child name"
                                  type="text"
                                  ref={ (ref) => this.name = ref }
                                  onChange={ this.valuesChanged.bind(this) }
@@ -71,6 +72,7 @@ class BasicsSection extends React.Component {
                       <label className="col-md-2 control-label"> Enter last name: </label>
                       <div className="col-md-10">
                           <input className="form-control"
+                                 placeholder="Child last name"
                                  type="text"
                                  ref={ (ref) => this.last_name = ref }
                                  onChange={ this.valuesChanged.bind(this) }
@@ -84,6 +86,7 @@ class BasicsSection extends React.Component {
                       <label className="col-md-2 control-label"> Enter middle name: </label>
                       <div className="col-md-10">
                           <input className="form-control"
+                                 placeholder="Child middle name"
                                  type="text"
                                  ref={ (ref) => this.middle_name = ref }
                                  onChange={ this.valuesChanged.bind(this) }
