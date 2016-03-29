@@ -8,6 +8,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'react-rails'
 
+gem 'will_paginate', '~> 3.0.6'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'haml-rails', '~> 0.9'
