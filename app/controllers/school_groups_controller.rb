@@ -7,8 +7,10 @@ class SchoolGroupsController < ApplicationController
     if current_user.has_role? 'super_admin'
       if params[:query].blank?
         @school_groups = SchoolGroup.paginate(:page => params[:page], :per_page => 10)
+        render 'school_groups/index'
       else
-        @school_groups = SchoolGroup.search(params[:query]).paginate(:page => params[:page], :per_page => 10)
+        @school_groups = SchoolGroup.search(params[:query])
+        render json: @school_groups
       end
     else
       @school_groups = SchoolGroup.with_role('admin', current_user)
