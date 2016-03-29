@@ -1,12 +1,10 @@
 - breadcrumb :edit_school_group, @school_group
-.col-md-12
-  %h1
-    Editing School Group
+%h1
+  Editing School Group
 
 = render 'form'
-.col-md-12
-  %h2
-    Choose an administrator for school group
-  - if !@users.blank?
-    = render partial: 'partials/users_preview', collection: @users, as: :user
-  = will_paginate @users
+%h2
+  Choose an administrator for school group
+- if !@users.blank?
+  = render partial: 'partials/users_preview', collection: @users, as: :user
+= will_paginate @users

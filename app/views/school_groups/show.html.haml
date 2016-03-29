@@ -1,56 +1,55 @@
 - breadcrumb :school_group, @school_group
-.col-md-12
-  %h2
-    = @school_group.name
-  %h3
-    Administrator for current school group
-  - if @admin.blank?
-    .alert.alert-warning
-      Current school group hasn't administrator yet!
-  - else
-    = render partial: 'partials/users_preview', collection: @admin, as: :user
-  = link_to 'Change administrator...', edit_school_group_path(@school_group)
-  %h3
-    Schools in current school group
-  .panel.panel-default.panel-table
-    .panel-heading
-      .row
-        .col.col-xs-6
-          .h3{class: 'panel-title'}
-            Edit schools below
-        .col.col-xs-6.text-right
-          = link_to 'New School', new_school_group_school_path(@school_group), class: 'btn btn-sm btn-primary'
-    .panel-body
-      - if !@schools.empty?
-        %table{class: "table table-striped table-bordered table-list"}
-          %thead
+%h2
+  = @school_group.name
+%h3
+  Administrator for current school group
+- if @admin.blank?
+  .alert.alert-warning
+    Current school group hasn't administrator yet!
+- else
+  = render partial: 'partials/users_preview', collection: @admin, as: :user
+= link_to 'Change administrator...', edit_school_group_path(@school_group)
+%h3
+  Schools in current school group
+.panel.panel-default.panel-table
+  .panel-heading
+    .row
+      .col.col-xs-6
+        .h3{class: 'panel-title'}
+          Edit schools below
+      .col.col-xs-6.text-right
+        = link_to 'New School', new_school_group_school_path(@school_group), class: 'btn btn-sm btn-primary'
+  .panel-body
+    - if !@schools.empty?
+      %table{class: "table table-striped table-bordered table-list"}
+        %thead
+          %tr
+            %th
+              %em{class: "fa fa-cog"}
+            %th{class: "hidden-xs col col-lg-1"}
+              ID
+            %th
+              School Name
+        %tbody
+          - @schools.each do |school|
             %tr
-              %th
-                %em{class: "fa fa-cog"}
-              %th{class: "hidden-xs col col-lg-1"}
-                ID
-              %th
-                School Name
-          %tbody
-            - @schools.each do |school|
-              %tr
-                %td{align: "center"}
-                  %a{class: "btn btn-default", href: "#{edit_school_group_school_url(@school_group.id, school.id)}"}
-                    %em{class: "fa fa-pencil"}
-                  = link_to school_group_school_path(@school_group.id, school.id), data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-danger" do
-                    %em{class: "fa fa-trash"}
-                %td{class: "hidden-xs"}
-                  = school.id
-                %td
-                  = school.name
-                  = link_to 'More...', school_group_school_path(@school_group.id, school.id), class: "col col-lg-1", style: "float: right"
-      - else
-        %br
-        .col-lg-7
-          .alert.alert-warning
-            There is no schools in current group yet but you may create one!
-      = will_paginate @schools
+              %td{align: "center"}
+                %a{class: "btn btn-default", href: "#{edit_school_group_school_url(@school_group.id, school.id)}"}
+                  %em{class: "fa fa-pencil"}
+                = link_to school_group_school_path(@school_group.id, school.id), data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-danger" do
+                  %em{class: "fa fa-trash"}
+              %td{class: "hidden-xs"}
+                = school.id
+              %td
+                = school.name
+                = link_to 'More...', school_group_school_path(@school_group.id, school.id), class: "col col-lg-1", style: "float: right"
+    - else
+      %br
+      .col-lg-7
+        .alert.alert-warning
+          There is no schools in current group yet but you may create one!
+    = will_paginate @schools
 
-  = link_to 'Edit', edit_school_group_path(@school_group), class: 'btn btn-primary'
-  = link_to 'Back', school_groups_path
+= link_to 'Edit', edit_school_group_path(@school_group), class: 'btn btn-primary'
+= link_to 'Back', school_groups_path
 
