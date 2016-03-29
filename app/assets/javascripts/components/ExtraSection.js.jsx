@@ -11,12 +11,22 @@ class ExtraSection extends React.Component {
         }
     }
 
+    calculatePercentage(){
+        var count = 0;
+        if(this.person.value)
+            count += 1;
+        if(this.contacts.value)
+            count += 1;
+        return (count / 2);
+    }
+
     valuesChanged(){
         var data = {};
         data.type = 'Extra';
         data.person = this.person.value;
         data.contacts = this.contacts.value;
         this.props.updateData(data);
+        this.props.updatePercentage(data.type, this.calculatePercentage());
     }
 
     render(){

@@ -7,6 +7,19 @@ class BasicsSection extends React.Component {
         e.preventDefault();
     }
 
+    calculatePercentage(){
+        var count = 0;
+        if(this.name.value)
+            count += 1;
+        if(this.last_name.value)
+            count += 1;
+        if(this.middle_name.value)
+            count += 1;
+        if(this.birthday.value)
+            count += 1;
+        return (count / 4);
+    }
+
     componentDidMount(){
         props = this.props;
         if(props.values) {
@@ -25,6 +38,7 @@ class BasicsSection extends React.Component {
         data.middle_name = this.middle_name.value;
         data.birthday = this.birthday.value;
         this.props.updateData(data);
+        this.props.updatePercentage(data.type, this.calculatePercentage());
     }
 
     render(){
@@ -44,6 +58,7 @@ class BasicsSection extends React.Component {
                       <label className="col-md-2 control-label"> Enter name: </label>
                       <div className="col-md-10">
                           <input className="form-control"
+                                 placeholder="Child name"
                                  type="text"
                                  ref={ (ref) => this.name = ref }
                                  onChange={ this.valuesChanged.bind(this) }
@@ -57,6 +72,7 @@ class BasicsSection extends React.Component {
                       <label className="col-md-2 control-label"> Enter last name: </label>
                       <div className="col-md-10">
                           <input className="form-control"
+                                 placeholder="Child last name"
                                  type="text"
                                  ref={ (ref) => this.last_name = ref }
                                  onChange={ this.valuesChanged.bind(this) }
@@ -70,6 +86,7 @@ class BasicsSection extends React.Component {
                       <label className="col-md-2 control-label"> Enter middle name: </label>
                       <div className="col-md-10">
                           <input className="form-control"
+                                 placeholder="Child middle name"
                                  type="text"
                                  ref={ (ref) => this.middle_name = ref }
                                  onChange={ this.valuesChanged.bind(this) }

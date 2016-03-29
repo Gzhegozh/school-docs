@@ -11,6 +11,15 @@ class AllergiesSection extends React.Component {
         this.setState({allergies: allergies});
     }
 
+    calculatePercentage(){
+        var count = 0;
+        this.state.allergies.map((item) => {
+            if(item)
+                count += 1;
+        });
+        return (count / this.state.allergies.length);
+    }
+
     updateAllergy(target, index){
         var data = {};
         data.type = 'Allergies';
@@ -20,6 +29,7 @@ class AllergiesSection extends React.Component {
         this.setState({allergies: allergies});
         data.allergies = allergies;
         this.props.updateData(data);
+        this.props.updatePercentage(data.type, this.calculatePercentage());
     }
 
     componentWillMount(){
@@ -38,7 +48,7 @@ class AllergiesSection extends React.Component {
                       If your child haven't allergies, ignore this section
                   </small>
               </h4>
-              <hr/>
+              <br/>
               {this.state.allergies.map((target, index) => {
                   return <Allergy updateAllergy={ this.updateAllergy.bind(this) }
                                   target={this.state.allergies[index]}

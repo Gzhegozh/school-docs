@@ -11,6 +11,20 @@ class MedicationsSection extends React.Component {
         this.setState({medications: meds});
     }
 
+    validateItem(item){
+        return((item.name && (item.name != ''))&& (item.notes && (item.notes != '')));
+    }
+
+    calculatePercentage(){
+        var count = 0;
+        this.state.medications.map( (item) => {
+               if(this.validateItem(item)){
+                   count += 1;
+               }
+        });
+        return ( count / this.state.medications.length);
+    }
+
     updateMedication(medication, index){
         var data = {};
         data.type = 'Medications';
@@ -21,7 +35,7 @@ class MedicationsSection extends React.Component {
 
         data.medications = meds;
         this.props.updateData(data);
-        console.log(data);
+        this.props.updatePercentage(data.type, this.calculatePercentage());
     }
 
     componentWillMount(){

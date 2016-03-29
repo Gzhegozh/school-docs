@@ -7,11 +7,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    - if devise_controller?
-      - @padding_left = "padding-left: 0;"
-    #wrapper{:style => "#{@padding_left}"}
-      %nav.navbar.navbar-inverse.navbar-fixed-top{:role => "navigation"}
-
+    %nav.navbar.navbar-inverse
+      .container-fluid
         .navbar-header
           %button.navbar-toggle{"data-target" => ".navbar-ex1-collapse", "data-toggle" => "collapse", :type => "button"}
             %span.sr-only Toggle navigation
@@ -38,15 +35,11 @@
               = link_to new_user_session_path do
                 %span.glyphicon.glyphicon-log-in
                 Login
-        - unless devise_controller?
-          = render :partial => 'layouts/sidebar'
-      #page-wrapper
-        .container-fluid
-          .row
-            .col-lg-12
-              = bootstrap_flash
-          .row
-            .col-lg-12
-              = breadcrumbs pretext: "You are here: ", separator: " &rsaquo; ", display_single_fragment: true, style: :bootstrap, semantic: true
-              = yield
-
+    .container
+      .row
+        .col-lg-12
+          = bootstrap_flash
+      .row
+        .col-lg-12
+          = breadcrumbs separator: " &rsaquo; ", style: :bootstrap, semantic: true, class: 'breadcrumb-arrow'
+          = yield

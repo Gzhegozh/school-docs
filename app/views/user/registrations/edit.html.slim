@@ -9,7 +9,7 @@
       .col-md-4.col-sm-6.col-xs-12
         = f.fields_for :profile do |profile_form|
           .text-center
-            = image_tag(current_user.profile.avatar.url, class: 'avatar img-circle img-thumbnail', alt: 'avatar')
+            = image_tag(current_user.profile.avatar.url, class: 'avatar img-circle img-thumbnail', alt: 'avatar', id: 'preview')
             h6
               = t('.upload_a_different_photo') + '...'
               = profile_form.file_field(:avatar, class: 'text-center center-block well well-sm')
@@ -32,40 +32,40 @@
                       current_user.locale.eql?('ru') ? 'ru' : 'en'), {}, { class: 'form-control'}
           = f.fields_for :profile do |profile_form|
             .form-group
-              label.col-lg-3.control-label
+              label.col-lg-3.control-label for='inputName'
                 = t('.name')+':'
               .col-lg-8
-                = profile_form.text_field :name, autocomplete: 'on', class: 'form-control'
+                = profile_form.text_field :name, autocomplete: 'on', class: 'form-control', id: 'inputName'
             .form-group
-              label.col-lg-3.control-label
+              label.col-lg-3.control-label for='inputLastName'
                 = t('.last_name')+':'
               .col-lg-8
-                = profile_form.text_field :last_name, autocomplete: 'on', class: 'form-control'
+                = profile_form.text_field :last_name, autocomplete: 'on', class: 'form-control', id: 'inputLastName'
             .form-group
-              label.col-md-3.control-label
+              label.col-md-3.control-label for='inputMiddleName'
                 = t('.middle_name')+':'
               .col-md-8
-                = profile_form.text_field :middle_name, autocomplete: 'on', class: 'form-control'
+                = profile_form.text_field :middle_name, autocomplete: 'on', class: 'form-control', id: 'inputMiddleName'
             .form-group
-              label.col-md-3.control-label
+              label.col-md-3.control-label for='inputBirthday'
                 = t('.birthday')+':'
               .col-md-8
-                = profile_form.date_field :birthday, class: 'form-control'
+                = profile_form.date_field :birthday, class: 'form-control', id: 'inputBirthday'
             .form-group
-              label.col-md-3.control-label
+              label.col-md-3.control-label for='inputPhone'
                 = t('.phone')
               .col-md-8
-                = profile_form.text_field :phone, autocomplete: 'on', class: 'form-control'
+                = profile_form.text_field :phone, autocomplete: 'on', class: 'form-control', id: 'inputPhone'
           .form-group
-            label.col-md-3.control-label
+            label.col-md-3.control-label for='inputPassword'
               = t('.password')+':'
             .col-md-8
-              = f.password_field :password, autocomplete: 'off', class: 'form-control'
+              = f.password_field :password, autocomplete: 'off', class: 'form-control', id: 'inputPassword'
           .form-group
-            label.col-md-3.control-label
+            label.col-md-3.control-label for='inputPasswordConfirmation'
               = t('.password_confirmation')+':'
             .col-md-8
-              = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
+              = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', id: 'inputPasswordConfirmation'
           /.form-group
             label.col-md-3.control-label
               = t('.current_password')+':'

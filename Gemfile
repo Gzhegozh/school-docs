@@ -8,6 +8,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'react-rails'
 
+
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'haml-rails', '~> 0.9'
@@ -36,6 +37,7 @@ gem 'gretel'
 gem 'factory_girl_rails'
 gem 'figaro'
 gem 'will_paginate', '~> 3.0.6'
+gem 'bootstrap-material-design'
 
 
 group :development, :test do
