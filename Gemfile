@@ -36,7 +36,8 @@ gem 'simple_form'
 gem 'gretel'
 gem 'factory_girl_rails'
 gem 'figaro'
-
+gem 'will_paginate', '~> 3.0.6'
+gem 'bootstrap-material-design'
 
 
 group :development, :test do
