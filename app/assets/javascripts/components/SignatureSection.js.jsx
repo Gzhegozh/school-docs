@@ -30,7 +30,6 @@ class SignatureSection extends React.Component {
     getSignData(e){
         e.preventDefault();
         this.sign = $('#sign').jSignature("getData", "base30");
-        alert(this.sign);
         var data = {};
         data.type = 'Signature';
         data.signature = $('#sign').jSignature("getData", "base30");

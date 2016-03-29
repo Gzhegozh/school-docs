@@ -5,7 +5,10 @@ class ContactsSection extends React.Component {
 
     importFromProfile(e){
         e.preventDefault();
-        alert('Imported');
+        this.phone.value = '102';
+        this.skype.value = 'Jonhsson';
+        this.email.value = 'John@example.com';
+        this.props.updatePercentage('Contacts', this.calculatePercentage());
     }
 
     valuesChanged(){
@@ -44,7 +47,7 @@ class ContactsSection extends React.Component {
                 <h3>Leave your contacts here</h3>
                 <h4>
                     <small>
-                        <a href="#" onClick={ this.importFromProfile }>Import </a>
+                        <a href="#" onClick={ this.importFromProfile.bind(this) }>Import </a>
                         phone and email from profile
                     </small>
                 </h4>

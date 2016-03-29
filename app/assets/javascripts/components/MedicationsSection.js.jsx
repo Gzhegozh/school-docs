@@ -17,6 +17,8 @@ class MedicationsSection extends React.Component {
 
     calculatePercentage(){
         var count = 0;
+        if(this.state.medications.length == 0)
+            return 1;
         this.state.medications.map( (item) => {
                if(this.validateItem(item)){
                    count += 1;
@@ -43,6 +45,7 @@ class MedicationsSection extends React.Component {
         if(props.values){
             this.setState({medications: props.values.medications});
         }
+        this.props.updatePercentage('Medications', this.calculatePercentage());
     }
 
     render(){

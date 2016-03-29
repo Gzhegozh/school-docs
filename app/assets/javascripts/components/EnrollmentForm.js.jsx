@@ -63,6 +63,11 @@ class EnrollmentForm extends React.Component {
         this.data[data.type] = data;
     }
 
+    componentDidUpdate(){
+        if(this.state.percents == 100)
+            alert("Congratulations!!!");
+    }
+
     render(){
         return (
             <div className="jumbotron">
