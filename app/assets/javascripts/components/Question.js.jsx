@@ -19,6 +19,7 @@ class Question extends React.Component {
                 </label>
                 <div className="col-lg-8">
                     <input type="text"
+                           placeholder="Answer"
                            className="form-control"
                            ref={ (ref) => this.answer = ref }
                            onChange={ this.updateAnswer.bind(this) }
