@@ -11,7 +11,7 @@ class FormMenu extends React.Component {
     render(){
         return (
           <div>
-            <ul className="nav nav-tabs">
+            <ul className="nav nav-tabs material-tabs">
                 { this.props.items.map( (item, index) => {
                     var style = '';
                     if(index == this.props.clicked){
