@@ -45,13 +45,18 @@ class SchoolGroup < ActiveRecord::Base
         query: {query_string: {query: query}},
         size: 20
     )
-    es.records
+    es.records.to_a
+    rescue Faraday::ConnectionFailed
+      search_in_db(params);
+  end
 
-    # if es.count
-    #   return search_id_db(params)
-    # end
+  def self.search_in_db(params)
+    SchoolGroup.where('name LIKE ?', "%#{params}%").all
   end
 
   SchoolGroup.__elasticsearch__.create_index! force: true
   SchoolGroup.import
+  rescue Faraday::ConnectionFailed
+
+
 end
