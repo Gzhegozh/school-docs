@@ -35,14 +35,11 @@
               = link_to new_user_session_path do
                 %span.glyphicon.glyphicon-log-in
                 Login
-
-      #page-wrapper
-        .container-fluid
-          .row
-            .col-lg-12
-              = bootstrap_flash
-          .row
-            .col-lg-12
-              .col-lg-12
-                = breadcrumbs separator: " &rsaquo; ", style: :bootstrap, semantic: true, class: 'breadcrumb-arrow'
-              = yield
+    .container-fluid
+      .row
+        .col-lg-12
+          = bootstrap_flash
+      .row
+        .col-lg-12
+          = breadcrumbs separator: " &rsaquo; ", style: :bootstrap, semantic: true, class: 'breadcrumb-arrow'
+          = yield
