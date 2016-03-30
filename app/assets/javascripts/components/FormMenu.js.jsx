@@ -11,7 +11,7 @@ class FormMenu extends React.Component {
     render(){
         return (
           <div>
-            <ul className="nav nav-tabs">
+            <ul className="material-tabs nav nav-tabs" role="tablist">
                 { this.props.items.map( (item, index) => {
                     var style = '';
                     if(index == this.props.clicked){
@@ -20,8 +20,10 @@ class FormMenu extends React.Component {
                     return <li role="presentation"
                                key={index}
                                className={style} >
-                                 <a href="#" onClick={ this.clicked.bind(this, index) }>
-                                   {item}
+                                 <a href="#"
+                                    onClick={ this.clicked.bind(this, index) }
+                                    role="tab">
+                                     {item}
                                  </a>
                            </li>;
                 })}

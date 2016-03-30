@@ -11,13 +11,14 @@ class ChildChooser extends React.Component{
 
     render(){
         return(
-            <div className="row">
-                <div className="col-lg-3">
-                    <h4>Choose child to enroll:</h4>
-                </div>
-                <div className="col-lg-9">
-                    {this.renderContent()}
-                </div>
+            <div>
+                <h3>In this section you must choose child to enroll:</h3>
+                <h4>
+                    <small>
+                        Click on child, that you wants to enroll to this grade
+                    </small>
+                </h4>
+                {this.renderContent()}
             </div>
         );
     }

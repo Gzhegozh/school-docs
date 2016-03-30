@@ -11,9 +11,9 @@ class ChildBlock extends React.Component {
     render(){
         return(
             <a href="#"
-               className="btn btn-default"
+               className="btn btn-raised btn-default"
                onClick={ this.clicked.bind(this) }>
-                <i className="fa fa-fw fa-users"/>
+                <i className="fa fa-fw fa-user"/>
                 {this.props.child}
             </a>
         );

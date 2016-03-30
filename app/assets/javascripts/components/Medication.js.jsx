@@ -16,7 +16,7 @@ class Medication extends React.Component {
 
     render(){
         return (
-            <div className="panel panel-default panel-body">
+            <div className="panel panel-default panel-body semi-gray">
                 <div className="col-lg-4">
                     <input type="text"
                            className="form-control"

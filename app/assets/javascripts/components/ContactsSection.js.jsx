@@ -55,6 +55,7 @@ class ContactsSection extends React.Component {
                     </label>
                     <div className="col-lg-9">
                         <input className="form-control"
+                               placeholder="Your phone"
                                type="text"
                                ref={(ref) => this.phone = ref}
                                onChange={ this.valuesChanged.bind(this) }
@@ -68,6 +69,7 @@ class ContactsSection extends React.Component {
                     </label>
                     <div className="col-lg-9">
                         <input className="form-control"
+                               placeholder="Your skype login"
                                type="text"
                                ref={(ref) => this.skype = ref}
                                onChange={ this.valuesChanged.bind(this) }
@@ -81,6 +83,7 @@ class ContactsSection extends React.Component {
                     </label>
                     <div className="col-lg-9">
                         <input className="form-control"
+                               placeholder="your-email@example.com"
                                type="text"
                                ref={(ref) => this.email = ref}
                                onChange={ this.valuesChanged.bind(this) }
