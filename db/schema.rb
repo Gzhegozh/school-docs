@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330110538) do
+ActiveRecord::Schema.define(version: 20160330113329) do
 
   create_table "allergies", force: :cascade do |t|
     t.string   "target",                      limit: 255
@@ -57,8 +57,9 @@ ActiveRecord::Schema.define(version: 20160330110538) do
   add_index "enrollment_form_instances", ["user_id"], name: "index_enrollment_form_instances_on_user_id", using: :btree
 
   create_table "enrollment_form_sections", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "name",       limit: 255
   end
 
   create_table "enrollment_form_sections_forms", id: false, force: :cascade do |t|
