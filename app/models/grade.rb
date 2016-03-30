@@ -8,4 +8,5 @@ class Grade < ActiveRecord::Base
   has_many :users, through: :enrollments
   has_one :enrollment_form
   has_many :enrollments
+  accepts_nested_attributes_for :enrollment_form
 end
