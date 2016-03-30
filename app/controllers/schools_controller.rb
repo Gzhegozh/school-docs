@@ -4,7 +4,15 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.all
+    if current_user.has_role? 'super_admin'
+      if !params[:query].blank?
+        @schools = School.search(params)
+        render json: @schools
+      else
+        @schools = School.where(school_group_id: params[:school_group_id])
+        render json: @schools
+      end
+    end
   end
 
   # GET /schools/1
@@ -71,6 +79,6 @@ class SchoolsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_params
-      params.require(:school).permit(:name, :school_group_id)
+      params.require(:school).permit(:name, :school_group_id, :query)
     end
 end
