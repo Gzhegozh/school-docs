@@ -16,6 +16,8 @@ class GradesController < ApplicationController
   # GET /grades/new
   def new
     @grade = @school.grades.new
+    @enrollment_form = @grade.build_enrollment_form
+    @enrollment_form.enrollment_form_sections << EnrollmentFormSection.all
   end
 
   # GET /grades/1/edit

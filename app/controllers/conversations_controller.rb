@@ -2,12 +2,10 @@ class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
 
   def create
-    recipient_emails = conversation_params(:recipients).split(',')
-    recipient_emails.map! {|email| email.strip}
+    recipient_ids = conversation_params(:recipients)
+    recipient_ids.delete(current_user.id)
 
-    recipient_emails.delete(current_user.email)
-
-    recipients = User.where(email: recipient_emails).all
+    recipients = User.where(id: recipient_ids).all
 
     conversation = current_user.
       send_message(recipients, *conversation_params(:body, :subject)).conversation
