@@ -1,5 +1,49 @@
-.col-md-10
-  %h2
-    = @school.name
-  = link_to 'Edit', edit_school_path(@school), class: 'btn btn-primary'
-  = link_to 'Back', school_groups_path
+- breadcrumb :school, @school
+%h2
+  = @school.name
+
+.row
+  .col-md-4
+    %div.completed-enrollments
+      .chart#graph{"data-percent" => "88"}
+      %div.caption
+        %h4 Completed enrollments
+  .col-md-8
+    %h4 Medications
+    .progress
+      .progress-bar{'style' => 'width: 70%;'}
+    %hr
+    %h4 Allergies
+    .progress
+      .progress-bar{'style' => 'width: 70%;'}
+    %hr
+    %h4 Restrictions
+    .progress
+      .progress-bar{'style' => 'width: 70%;'}
+    %hr
+
+%h2 Grades and activities
+.panel.panel-default.panel-table
+  .panel-heading
+    .row
+      .col.col-xs-6
+        .h3{class: 'panel-title'}
+          Edit grades and activities below
+      .col.col-xs-6.text-right
+        = link_to 'New Grade or Activity', new_school_group_school_grade_path(@school.school_group, @school), class: 'btn btn-sm btn-primary'
+  .panel-body
+    - if !@school.grades.blank?
+      .list-group{style: 'margin-bottom: 0;'}
+        - @school.grades.each do |gr|
+          = link_to school_group_school_grade_path(gr.school.school_group, gr.school, gr), class: 'list-group-item' do
+            .list-group-item-heading
+              %h4
+                = gr.name
+            .list-group-item-text
+              = gr.description
+    - else
+      %br
+      .alert.alert-warning
+        There is no grades or activities yet but you may create one!
+= link_to 'Edit', edit_school_group_school_path(@school, school_group_id: @school.school_group_id), class: 'btn btn-primary'
+= link_to 'Back', school_group_path(@school.school_group.id)

@@ -1,4 +1,38 @@
-.container
+.col-md-offset-3.col-md-6
+  .well.bs-component
+    = form_for(resource, :html => {:class => 'form-horizontal'}, as: resource_name, url: registration_path(resource_name)) do |f|
+      fieldset
+        legend
+          | Login
+        .form-group
+          label for='inputEmail' class='col-md-2 control-label'
+            | Email
+          .col-md-10
+            = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email', id: 'inputEmail'
+        .form-group
+          label for="inputRole" class='col-md-2 control-label'
+            | Who are you?
+          .col-md-10
+            = f.select :roles, options_for_select([['Student', 'student'], ['Parent', 'parent']]), {}, {class: 'form-control'}
+        .form-group
+          label for="inputPassword" class="col-md-2 control-label"
+            | Password
+          .col-md-10
+            = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password', id: 'inputPassword'
+        .form-group
+          label for="inputPasswordConfirmation" class="col-md-2 control-label"
+            | Password confirmation
+          .col-md-10
+            = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: 'Password confirmation', id: 'inputPasswordConfirmation'
+        .form-group
+          .col-md-10.col-md-offset-2
+            = f.submit 'Sign up', class: 'btn btn-primary'
+        .form-group
+          .col-md-offset-2.col-md-10
+            ' Already registered?
+            = link_to('Sign in', new_user_session_path)
+
+/.container
   #signupbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2[style="margin-top:50px"]
     .panel.panel-info
       .panel-heading
@@ -16,6 +50,10 @@
               i.fa.fa-file-image-o
             = f.file_field :avatar, :class=>"form-control"
             = f.hidden_field :avatar_cache
+          .input-group[style="margin-bottom: 25px"]
+            span.input-group-addon
+              i.fa.fa-key.fa-fw
+            = f.select :roles, options_for_select([['Student', 'student'], ['Parent', 'parent']]), {}, { class: 'form-control'}
           .input-group[style="margin-bottom: 25px"]
             span.input-group-addon
               i.fa.fa-key.fa-fw

@@ -1,0 +1,30 @@
+- breadcrumb :choose_students, @grade
+h3
+  | Choose students:
+table.table
+  thead
+    tr
+      th
+        | Email
+      th
+        | Firstname
+      th
+        | Lastname
+      th
+        | Choose
+  tbody
+    - @students.each do |student|
+      tr
+        td
+          = student.email
+        td
+          = student.profile.name || ' - '
+        td
+          = student.profile.last_name || ' - '
+        td
+          - @checked = (student.enrollments.where(grade_id: @grade.id).size > 0)
+          input [class= 'choose-user'
+            data-add-path=add_student_to_grade_url(@grade.school.school_group, @grade.school, @grade, student)
+            data-delete-path=delete_student_from_grade_url(@grade.school.school_group, @grade.school, @grade, student)
+            id=student.id type="checkbox" value="" checked=@checked]
+= will_paginate @students, previous_label: '<', next_label: '>'

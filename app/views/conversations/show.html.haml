@@ -1,3 +1,4 @@
+-#<<<<<<< HEAD
 .panel.panel-default.widget#all_messages{ "data-id" => "#{conversation.id}"}
   .panel-heading
     %span.glyphicon.glyphicon-comment
@@ -6,7 +7,32 @@
   .panel-body
     %ul.list-group
       = render 'conversations/receipts', receipts: @receipts
+-#=======
+-#.container
+-#  .panel.panel-default.widget
+-#    .panel-heading
+-#      %span.glyphicon.glyphicon-comment
+-#      %h3.panel-title
+-#        = conversation.subject
+-#    .panel-body
+-#      .list-group
+-#        = content_tag_for(:div, conversation.receipts_for(current_user), class: "list-group-item") do|receipt|
+-#
+-#          - message = receipt.message
+-#          .row-picture
+-#            = image_tag(message.sender.profile.avatar.url, class: 'circle', alt: 'avatar', width: "50px")
+-#          .row-content
+-#            %h4{class:"list-group-item-heading"}
+-#              - if message.sender.profile.present? && message.sender.profile.name.present?
+-#                = message.sender.profile.name
+-#              - else
+-#                = message.sender.email
+-#
+-#            %p{class: "list-group-item-text"}
+-#              = message.body
+-#          .list-group-separator
+-#>>>>>>> staging
 
-= render 'messages/form', conversation: conversation
+  = render 'messages/form', conversation: conversation
 
-= link_to "Back", conversations_path, class: "btn btn-default"
+  = link_to "Back", conversations_path, class: "btn btn-default"

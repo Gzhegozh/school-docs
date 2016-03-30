@@ -4,13 +4,24 @@ class SchoolGroupsController < ApplicationController
   # GET /school_groups
   # GET /school_groups.json
   def index
-    @school_groups = SchoolGroup.all
+    if current_user.has_role? 'super_admin'
+      if params[:query].blank?
+        @school_groups = SchoolGroup.paginate(:page => params[:page], :per_page => 10)
+        render 'school_groups/index'
+      else
+        @school_groups = SchoolGroup.search(params[:query])
+        render json: @school_groups
+      end
+    else
+      @school_groups = SchoolGroup.with_role('admin', current_user)
+    end
   end
 
   # GET /school_groups/1
   # GET /school_groups/1.json
   def show
-    @admin = User.with_role(:admin, @school_group).first
+    @admin = User.with_role(:admin, @school_group)
+    @schools = @school_group.schools.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /school_groups/new
@@ -20,7 +31,7 @@ class SchoolGroupsController < ApplicationController
 
   # GET /school_groups/1/edit
   def edit
-    @users = User.all
+    @users = User.paginate(:page => params[:page], :per_page => 5)
   end
 
   # POST /school_groups
@@ -58,7 +69,7 @@ class SchoolGroupsController < ApplicationController
   def destroy
     @school_group.destroy
     respond_to do |format|
-      format.html { redirect_to school_groups_url, notice: 'School group was successfully destroyed.' }
+      format.html { redirect_to @school_group, notice: 'School group was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +82,6 @@ class SchoolGroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_group_params
-      params.require(:school_group).permit(:name)
+      params.require(:school_group).permit(:name, :page, :query)
     end
 end

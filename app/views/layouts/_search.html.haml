@@ -1,0 +1,4 @@
+.col-lg-4
+  %br
+  = form_tag url_for(), method: :get do
+    = text_field_tag :query, params[:query], class: "form-control", id: "search", autocomplete: "off", placeholder: 'Start printing something'

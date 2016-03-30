@@ -19,4 +19,6 @@
 //= require components
 //= require bootstrap
 //= require polling
+//= require bootstrap-material-design
+//= require bootstrap-tokenfield
 //= require_tree .

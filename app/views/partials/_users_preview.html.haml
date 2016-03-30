@@ -1,0 +1,41 @@
+- if user != current_user
+  .col-md-12
+    .row.carousel-row
+      .col-xs-8.slide-row
+        #carousel-2{class: "carousel slide slide-carousel", 'data-ride': "carousel"}
+          .carousel-inner
+            .item.active
+              = image_tag user.profile.avatar.url
+        .slide-content{style: 'left: 20%'}
+          %h4
+            - if user.profile.name.present?
+              = user.profile.name
+            - else
+              No Name
+            - if user.profile.last_name.present?
+              = user.profile.last_name
+            - else
+              No Surname
+          = user.email
+          %br
+          .glyphicon.glyphicon-calendar
+          - if user.profile.birthday.present?
+            = user.profile.birthday
+          - else
+            %i
+              Birthday Unknown
+          %br
+          .glyphicon.glyphicon-phone
+          - if user.profile.phone.present?
+            = user.profile.phone
+          - else
+            %i
+              Phone Unknown
+        .slide-footer
+          %span{class:"pull-right buttons"}
+            - if current_page?(edit_school_group_path) && current_user.has_role?(:super_admin)
+              %div{style: 'float: left'}
+                = form_for user, :url => url_for(controller: :admin, action: :set_admin), method: :post do |f|
+                  = f.hidden_field :id, value: user.id
+                  = f.hidden_field :school_group_id, value: params[:id]
+                  = f.submit 'Choose', class: 'btn btn-sm btn-primary', style: 'display: inline'
