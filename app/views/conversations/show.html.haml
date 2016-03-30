@@ -1,32 +1,27 @@
-.panel.panel-default.widget
-  .panel-heading
-    %span.glyphicon.glyphicon-comment
-    %h3.panel-title
-      = conversation.subject
-  .panel-body
-    %ul.list-group
-      = content_tag_for(:li, conversation.receipts_for(current_user), class: "list-group-item") do|receipt|
-        - message = receipt.message
-        .row
-          .col-xs-2.col-md-1         
-            - unless message.sender.profile.nil? || message.sender.profile.avatar.nil?
-              = image_tag(message.sender.profile.avatar.url, class: 'avatar img-thumbnail', alt: 'avatar', width: "50px")
-            - else
-              = image_tag(image_path('default.png'), class: 'avatar img-thumbnail', alt: 'avatar', width: "50px")
-          .col-xs-10.col-md-11
-            %div
-              %h5
-                - unless message.sender.profile.nil?
-                  = message.sender.profile.name
-                - else 
-                  = message.sender.email
-              .mic-info
-                = message.created_at.strftime("on %m %b %Y")
-              %br
-            .comment-text
+.container
+  .panel.panel-default.widget
+    .panel-heading
+      %span.glyphicon.glyphicon-comment
+      %h3.panel-title
+        = conversation.subject
+    .panel-body
+      .list-group
+        = content_tag_for(:div, conversation.receipts_for(current_user), class: "list-group-item") do|receipt|
+
+          - message = receipt.message
+          .row-picture
+            = image_tag(message.sender.profile.avatar.url, class: 'circle', alt: 'avatar', width: "50px")
+          .row-content
+            %h4{class:"list-group-item-heading"}
+              - if message.sender.profile.present? && message.sender.profile.name.present?
+                = message.sender.profile.name
+              - else
+                = message.sender.email
+
+            %p{class: "list-group-item-text"}
               = message.body
-          %br
+          .list-group-separator
 
-= render 'messages/form', conversation: conversation
+  = render 'messages/form', conversation: conversation
 
-= link_to "Back", conversations_path, class: "btn btn-default"
+  = link_to "Back", conversations_path, class: "btn btn-default"

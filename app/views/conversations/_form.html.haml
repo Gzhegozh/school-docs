@@ -1,8 +1,16 @@
-= simple_form_for :conversation, url: :conversations do |f|
-  = f.input :recipients
-  = f.input :subject
-  = f.input :body, as: :text
-  .form-actions
-    = f.button :submit, class: 'btn-primary'
-    = f.button :submit, 'Cancel', type: :reset, class: 'btn-danger'
-= link_to "Back", conversations_path, class: "btn btn-default"
+
+
+.modal-header
+  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span{"aria-hidden" => "true"} ×
+  %h4#myModalLabel.modal-title
+    New message
+  %br
+  = simple_form_for :conversation, url: :conversations do |f|
+    .modal-body
+      = f.input :recipients, input_html: {'data-role' => 'materialtags'}
+      = f.input :subject
+      = f.input :body, as: :text
+    .modal-footer
+      %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+      = f.button :submit, 'Send message', class: 'btn-primary'
