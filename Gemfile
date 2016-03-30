@@ -40,6 +40,8 @@ gem 'figaro'
 gem 'will_paginate', '~> 3.0.6'
 gem 'bootstrap-material-design'
 gem 'bootstrap_tokenfield_rails'
+gem 'chosen-rails'
+
 
 
 group :development, :test do

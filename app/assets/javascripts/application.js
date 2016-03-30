@@ -21,4 +21,5 @@
 //= require polling
 //= require bootstrap-material-design
 //= require bootstrap-tokenfield
+//= require chosen-jquery
 //= require_tree .

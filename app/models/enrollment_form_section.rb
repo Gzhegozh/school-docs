@@ -1,3 +1,3 @@
 class EnrollmentFormSection < ActiveRecord::Base
-  belongs_to :enrollment_form
+  has_and_belongs_to_many :enrollment_forms
 end
