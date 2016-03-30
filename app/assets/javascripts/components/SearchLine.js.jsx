@@ -1,5 +1,4 @@
-class PeopleSearch extends React.Component {
-    //displayName = 'Search';
+class SearchLine extends React.Component {
 
     constructor(props){
         super(props);
@@ -12,9 +11,14 @@ class PeopleSearch extends React.Component {
     }
 
     render(){
-        <form action="+window.location.pathname+" method="get" accept-charset="UTF-8" onkeyup={this.handleOnKeyup.bind(this)}>
-            <input ref={(ref) => {this.search_text = ref}} placeholder="Search people..." type="search"/>
-        </form>
+        return(<form action={this.props.action} method="get">
+            <input ref={(ref) => {this.search_text = ref}}
+                   placeholder="Start printing something..."
+                   type="text"
+                   onChange={this.handleOnKeyup.bind(this)}
+                   className="form-control"
+                   autoComplete="off"/>
+        </form>);
     }
 
 }
