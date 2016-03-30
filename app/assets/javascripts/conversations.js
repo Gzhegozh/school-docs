@@ -4,8 +4,11 @@ $('#myTabs a').click(function (e) {
 })
 
 ready = function() {
-  $('input.tokenizeUsers').tokenfield();
-
+  $('.chosen-select').chosen({
+      allow_single_deselect: true,
+      no_results_text: 'No results matched',
+      width: '100%'
+  });
   $('.star').on('click', function () {
     $(this).toggleClass('star-checked');
   });

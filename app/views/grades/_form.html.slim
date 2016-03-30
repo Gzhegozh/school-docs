@@ -6,6 +6,8 @@
     = f.input :description
     = f.input :certificate_template_path
     = f.hidden_field :certificate_template_path_cache
+    - f.simple_fields_for :enrollment_form do |enrollment_form|
+      = enrollment_form.association :enrollment_form_sections
     /= f.association :school
 
   .form-actions
