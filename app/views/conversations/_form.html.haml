@@ -8,7 +8,12 @@
   %br
   = simple_form_for :conversation, url: :conversations do |f|
     .modal-body
-      = f.input :recipients, input_html: {'data-role' => 'materialtags'}
+      /= f.input :recipients, input_html: {class: 'tokenizeUsers'}
+      = f.label :recipients
+      = f.select :recipients,
+                  User.all.map { |u| [u.email, u.id] },
+               { include_blank: true },
+               { multiple: true, class: 'chosen-select form-control', 'data-placeholder'=>"Choose a recipients..." }
       = f.input :subject
       = f.input :body, as: :text
     .modal-footer

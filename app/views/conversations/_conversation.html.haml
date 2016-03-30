@@ -12,7 +12,7 @@
         %i.glyphicon.glyphicon-star
   %td
     - conversation.recipients.each do |recipient|
-      - unless recipient.profile.nil?
+      - unless recipient.profile.name.nil?
         = recipient.profile.name
       - else 
         = recipient.email

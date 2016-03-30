@@ -1,0 +1,21 @@
+- message = receipt.message
+%li.list-group-item.message{ "data-id" => "#{message.id}"}
+  .row
+    .col-xs-2.col-md-1         
+      - unless message.sender.profile.nil? || message.sender.profile.avatar.nil?
+        = image_tag(message.sender.profile.avatar.url, class: 'avatar img-thumbnail', alt: 'avatar', width: "50px")
+      - else
+        = image_tag(image_path('default.png'), class: 'avatar img-thumbnail', alt: 'avatar', width: "50px")
+    .col-xs-10.col-md-11
+      %div
+        %h5
+          - unless message.sender.profile.name.nil?
+            = message.sender.profile.name
+          - else 
+            = message.sender.email
+        .mic-info
+          = message.created_at.strftime("on %m %b %Y")
+        %br
+      .comment-text
+        = message.body
+        %br

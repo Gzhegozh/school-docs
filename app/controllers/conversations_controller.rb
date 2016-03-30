@@ -2,22 +2,28 @@ class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
 
   def create
-    recipient_emails = conversation_params(:recipients).split(',')
-    recipient_emails.map! {|email| email.strip}
-
-    recipient_emails.delete(current_user.email)
-
-    recipients = User.where(email: recipient_emails).all
+    recipient_ids = conversation_params(:recipients)
+    recipient_ids.delete(current_user.id)
+    @recipients = User.where(id: recipient_ids).all
 
     conversation = current_user.
-      send_message(recipients, *conversation_params(:body, :subject)).conversation
+      send_message(@recipients, *conversation_params(:body, :subject)).conversation
 
     redirect_to conversation_path(conversation)
   end
 
-  def reply
-    current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
-    redirect_to conversation_path(conversation)
+  def show
+    @receipts = conversation.receipts_for(current_user).includes(message: [sender: [:profile]]).where('mailboxer_notifications.id > ?', params[:after_id].to_i)
+  end
+
+  def reply   
+    @reciept = current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+    @message = @reciept.message
+    @id = conversation.id
+    respond_to do |format|
+      format.html { redirect_to conversation_path(conversation) }
+      format.js
+    end
   end
 
   def trash
@@ -33,6 +39,10 @@ class ConversationsController < ApplicationController
   def delete_from_trash
     conversation.mark_as_deleted current_user
     redirect_to :conversations
+  end
+
+  def chat
+    @receipts = conversation.receipts_for(current_user).includes(message: [sender: [:profile]]).where('mailboxer_notifications.id > ?', params[:after_id].to_i)
   end
 
   private
