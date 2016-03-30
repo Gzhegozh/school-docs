@@ -23,7 +23,7 @@ class FormMenu extends React.Component {
                                  <a href="#"
                                     onClick={ this.clicked.bind(this, index) }
                                     role="tab">
-                                   {item}
+                                     {item}
                                  </a>
                            </li>;
                 })}

@@ -4,6 +4,8 @@ $('#myTabs a').click(function (e) {
 })
 
 ready = function() {
+  $('input.tokenizeUsers').tokenfield();
+
   $('.star').on('click', function () {
     $(this).toggleClass('star-checked');
   });

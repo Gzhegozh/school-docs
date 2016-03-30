@@ -97,6 +97,8 @@ class EnrollmentForm extends React.Component {
 
     renderSection(item){
         switch (item){
+            case 'ChildChooser':
+                return (<ChildChooser childs={ ['Lukas', 'James', 'Molly', 'Billie'] }/>);
             case 'Basics':
                 return (<BasicsSection updateData={ this.updateSectionData.bind(this) }
                                        values={ this.data.Basics }

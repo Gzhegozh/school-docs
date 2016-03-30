@@ -57,7 +57,6 @@ class MedicationsSection extends React.Component {
                    Here you can specify medications for your child
                 </small>
             </h4>
-            <hr/>
            {this.state.medications.map((medication, index) => {
                return <Medication onUpdate={ this.updateMedication.bind(this) }
                                   key={ index }
