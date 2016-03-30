@@ -67,16 +67,20 @@ class GradesController < ApplicationController
   end
 
   def add_student
-    @student = User.find(params[:student_id])
-    unless @grade.users.exists? @student
-      @grade.users << @student
+    if current_user.has_role?('admin', @grade) || current_user.has_role?('super_admin')
+      @student = User.find(params[:student_id])
+      unless @grade.users.exists? @student
+        @grade.users << @student
+      end
     end
     render :json => {status: :ok}
   end
 
   def delete_student
-    @student = User.find(params[:student_id])
-    @grade.enrollments.where(user: @student).first.destroy
+    if current_user.has_role?('admin', @grade) || current_user.has_role?('super_admin')
+      @student = User.find(params[:student_id])
+      @grade.enrollments.where(user: @student).first.destroy
+    end
     render :json => {status: :ok}
   end
   private

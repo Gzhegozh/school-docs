@@ -3,6 +3,7 @@ class ConversationsController < ApplicationController
 
   def create
     recipient_emails = conversation_params(:recipients).split(',')
+    recipient_emails.map! {|email| email.strip}
 
     recipient_emails.delete(current_user.email)
 

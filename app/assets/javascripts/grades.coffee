@@ -6,8 +6,8 @@ $(document).on "page:change", ->
   $('.choose-user').on "change", (e) ->
       id = $(e.target).attr('id')
       if ($(this).is ':checked')
-        $.get($(e.target).attr('data-add-path')).done (data) ->
+        $.post($(e.target).attr('data-add-path')).done (data) ->
           alert "Student added to grade"
       else
-        $.get($(e.target).attr('data-delete-path')).done (data) ->
+        $.post($(e.target).attr('data-delete-path')).done (data) ->
           alert "Student deleted from grade"

@@ -20,11 +20,12 @@ Rails.application.routes.draw do
   get '/school_groups/:school_group_id/schools/:school_id/grades/:id/choose_students' => 'grades#choose_students',
           as: :choose_students_school_group_school_grade
 
-  get '/school_groups/:school_group_id/schools/:school_id/grades/:id/add_student/:student_id' => 'grades#add_student',
+  post '/school_groups/:school_group_id/schools/:school_id/grades/:id/add_student/:student_id' => 'grades#add_student',
        as: :add_student_to_grade
-  get '/school_groups/:school_group_id/schools/:school_id/grades/:id/delete_student/:student_id' => 'grades#delete_student',
+  post '/school_groups/:school_group_id/schools/:school_id/grades/:id/delete_student/:student_id' => 'grades#delete_student',
        as: :delete_student_from_grade
 
+  get '/users/index/' => 'users#index'
   resources :conversations, only: [:index, :show, :new, :create] do
     member do
       post :reply
