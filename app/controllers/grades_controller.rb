@@ -16,8 +16,7 @@ class GradesController < ApplicationController
   # GET /grades/new
   def new
     @grade = @school.grades.new
-    @enrollment_form = @grade.build_enrollment_form
-    @enrollment_form.enrollment_form_sections << EnrollmentFormSection.all
+    @grade.build_enrollment_form
   end
 
   # GET /grades/1/edit
@@ -28,6 +27,12 @@ class GradesController < ApplicationController
   # POST /grades.json
   def create
     @grade = @school.grades.new(grade_params)
+    @enrollment_form = @grade.build_enrollment_form
+    @enrollment_form.save
+    @sections = params[:sections]
+    @sections.each do |section|
+      @enrollment_form.enrollment_form_sections << EnrollmentFormSection.find(section)
+    end
 
     respond_to do |format|
       if @grade.save
@@ -43,6 +48,12 @@ class GradesController < ApplicationController
   # PATCH/PUT /grades/1
   # PATCH/PUT /grades/1.json
   def update
+    @enrollment_form = @grade.build_enrollment_form
+    @sections = params[:sections]
+    @enrollment_form.enrollment_form_sections.clear
+    @sections.each do |section|
+      @enrollment_form.enrollment_form_sections << EnrollmentFormSection.find(section)
+    end
     respond_to do |format|
       if @grade.update(grade_params)
         format.html { redirect_to [@school.school_group, @school], notice: 'Grade was successfully updated.' }

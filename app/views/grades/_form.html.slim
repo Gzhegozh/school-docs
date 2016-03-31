@@ -4,10 +4,13 @@
   .form-inputs
     = f.input :name
     = f.input :description
+    = f.label "Enrollment form sections"
+    = select_tag :sections,
+            options_from_collection_for_select(EnrollmentFormSection.all, 'id', 'name', @grade.enrollment_form.enrollment_form_sections.map(&:id)),
+            {include_blank: true, multiple: true, class: 'chosen-select form-control', 'data-placeholder' => "Choose a enrollment form sections..."}
+
     = f.input :certificate_template_path
     = f.hidden_field :certificate_template_path_cache
-    - f.simple_fields_for :enrollment_form do |enrollment_form|
-      = enrollment_form.association :enrollment_form_sections, as: :check_boxes
     /= f.association :school
 
   .form-actions

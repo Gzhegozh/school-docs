@@ -1,59 +1,88 @@
-//ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
-//
-//@PeopleSection = React.createClass
-//displayName: 'PeopleSection'
-//
-//getInitialState: ->
-//didFetchData: false
-//people: []
-//
-//componentDidMount: ->
-//@_fetchPeople({})
-//
-//_fetchPeople: (data)->
-//    $.ajax
-//url: Routes.people_path()
-//dataType: 'json'
-//data: data
-//    .done @_fetchDataDone
-//    .fail @_fetchDataFail
-//
-//_fetchDataDone: (data, textStatus, jqXHR) ->
-//return false unless @isMounted()
-//@setState
-//didFetchData: true
-//people: data
-//
-//_fetchDataFail: (xhr, status, err) =>
-//    console.error @props.url, status, err.toString()
-//
-//_handleOnSearchSubmit: (search) ->
-//    @_fetchPeople
-//search: search
-//
-//render: ->
-//cardsNode = @state.people.map (person) ->
-//<PersonCard key={person.id} data={person}/>
-//
-//noDataNode =
-//    <div className="warning">
-//        <span className="fa-stack">
-//          <i className="fa fa-meh-o fa-stack-2x"></i>
-//        </span>
-//        <h4>No people found...</h4>
-//    </div>
-//
-//    <div>
-//    <PeopleSearch onFormSubmit={@_handleOnSearchSubmit}/>
-//    <div className="cards-wrapper">
-//{
-//    if @state.people.length > 0
-//    <ReactCSSTransitionGroup transitionName="card">
-//    {cardsNode}
-//</ReactCSSTransitionGroup>
-//else if @state.didFetchData
-//{noDataNode}
-//}
-//</div>
-//</div>
-//Status API Training Shop Blog About
+class SearchWrapper extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.state = {didFetchData: false, page: 1, results: props.results};
+    }
+
+    componentDidMount(){
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+
+    handleScroll(){
+        if ($(window).scrollTop() > $(document).height() - $(window).height() - 60){
+            this.state.page++;
+            this.fetchResults({all: true, page: this.state.page});
+        }
+    }
+
+    fetchResults(params){
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: this.props.action,
+            data: {
+                query: params.query,
+                page: params.page
+            },
+            success: (data) => {
+                var tmp = this.state.results;
+                if (params.all) {
+                    data.forEach((item) => {
+                        tmp.push(item);
+                    });
+                    this.setState({didFetchData: true, results: tmp})
+                }
+                else{
+                    tmp = [];
+                    this.setState({didFetchData: true, results: data})
+                }
+            }
+        });
+    }
+
+    handleOnSearchSubmit(search){
+        if (search == ''){
+            this.state.results = [];
+            this.state.page = 1;
+            this.fetchResults({query: search, all: true});
+        }
+        else {
+            this.fetchResults({query: search, all: false});
+        }
+    }
+
+    render(){
+        return(<div className="row">
+            <div className="col-lg-12">
+
+                <div className="col-lg-8">
+                    <h1>
+                        {this.props.name}
+                    </h1>
+                </div>
+                <div className="col-lg-4">
+                    <br/>
+                        <SearchLine onFormSubmit={this.handleOnSearchSubmit.bind(this)}/>
+                </div>
+                <div className="panel panel-default panel-table">
+                    <div className="panel-heading">
+                        <div className="row">
+                            <div className="col col-xs-6">
+                                <div className="h3 panel-title">
+                                    {'Edit ' + this.props.name + ' below'}
+                                </div>
+                            </div>
+                            <div className="col col-xs-6 text-right">
+                                <a className="btn btn-sm btn-primary" href={this.props.action + '/new'}>{'New ' + this.props.name}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="panel-body">
+                        <SearchResults results={this.state.results} action={this.props.action}/>
+                    </div>
+                </div>
+            </div>
+        </div>);
+    }
+}

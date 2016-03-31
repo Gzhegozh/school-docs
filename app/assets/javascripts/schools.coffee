@@ -4,6 +4,7 @@
 
 #window.graphDrawed = false
 $(document).on "page:change", ->
+
   el = document.getElementById('graph')
   # get canvas
   options =
