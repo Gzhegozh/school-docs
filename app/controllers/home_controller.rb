@@ -6,6 +6,10 @@ class HomeController < ApplicationController
       #@group = SchoolGroup.with_role('admin', current_user).first
       #redirect_to school_group_path(@group)
       redirect_to school_groups_path
+    elsif current_user.parent?
+
+    elsif current_user.student?
+      redirect_to
     end
 
   end

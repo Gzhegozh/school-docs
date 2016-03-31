@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :enrollment_form
 
 
+  get 'dashboard', to: ''
+
+
   root to: 'home#index'
   devise_for :users, :controllers => {registrations: 'user/registrations', 
                                       sessions: 'user/sessions',

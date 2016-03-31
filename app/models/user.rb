@@ -20,6 +20,14 @@ class User < ActiveRecord::Base
     email
   end
 
+  def parent?
+    has_role? 'parent'
+  end
+
+  def student?
+    has_role? 'student'
+  end
+
   include Elasticsearch::Model
   include Elasticsearch::Model::Response::Pagination::WillPaginate
 
