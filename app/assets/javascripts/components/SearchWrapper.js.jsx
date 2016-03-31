@@ -2,28 +2,47 @@ class SearchWrapper extends React.Component{
 
     constructor(props){
         super(props);
-        this.fetchResults('');
-        this.state = {didFetchData: false, results: []}
+        this.state = {didFetchData: false, page: 1, results: props.results};
     }
 
-    fetchResults(data){
+    componentDidMount(){
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+
+    handleScroll(){
+        if ($(window).scrollTop() > $(document).height() - $(window).height() - 60){
+            this.state.page++;
+            this.fetchResults({all: true, page: this.state.page});
+        }
+    }
+
+    fetchResults(params){
         $.ajax({
             type: 'GET',
             dataType: 'json',
             url: this.props.action,
             data: {
-                query: data['query']
+                query: params.query,
+                page: params.page
+            },
+            success: (data) => {
+                var tmp = this.state.results;
+                if (params.all) {
+                    data.forEach((item) => {
+                        tmp.push(item);
+                    });
+                    this.setState({didFetchData: true, results: tmp})
+                }
+                else{
+                    tmp = [];
+                    this.setState({didFetchData: true, results: data})
+                }
             }
-        }).success(this.fetchDataSuccess.bind(this));
+        });
     }
-
-    fetchDataSuccess(data){
-        this.setState({didFetchData: true, results: data})
-    }
-
 
     handleOnSearchSubmit(search){
-        this.fetchResults({query: search});
+        this.fetchResults({query: search, all: false});
     }
 
     render(){
@@ -32,7 +51,7 @@ class SearchWrapper extends React.Component{
 
                 <div className="col-lg-8">
                     <h1>
-                        School Groups
+                        {this.props.name}
                     </h1>
                 </div>
                 <div className="col-lg-4">
@@ -44,11 +63,11 @@ class SearchWrapper extends React.Component{
                         <div className="row">
                             <div className="col col-xs-6">
                                 <div className="h3 panel-title">
-                                    Edit school groups below
+                                    {'Edit ' + this.props.name + ' below'}
                                 </div>
                             </div>
                             <div className="col col-xs-6 text-right">
-                                <a className="btn btn-sm btn-primary" href="/school_groups/new">New School group</a>
+                                <a className="btn btn-sm btn-primary" href={this.props.action + '/new'}>{'New ' + this.props.name}</a>
                             </div>
                         </div>
                     </div>

@@ -7,10 +7,10 @@ class SearchResultItem extends React.Component{
     render(){
         return(<tr>
             <td align="center">
-                <a className="btn btn-default" href={this.props.edit_action}>
+                <a className="btn btn-default btn-edit" href={this.props.edit_action}>
                     <em className="fa fa-pencil"/>
                 </a>
-                <a data-confirm="Are you sure?" className="btn btn-danger btn-fab-mini" rel="nofollow" data-method="delete" href={this.props.show_action}>
+                <a data-confirm="Are you sure?" className="btn btn-danger btn-dlt" rel="nofollow" data-method="delete" href={this.props.show_action}>
                     <em className="fa fa-trash"/>
                 </a>
             </td>

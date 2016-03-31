@@ -6,7 +6,7 @@ class SchoolGroupsController < ApplicationController
   def index
     if current_user.has_role? 'super_admin'
       if params[:query].blank?
-        @school_groups = SchoolGroup.paginate(:page => params[:page], :per_page => 10)
+        @school_groups = SchoolGroup.paginate(:page => params[:page], :per_page => 4)
         render 'school_groups/index'
       else
         @school_groups = SchoolGroup.search(params[:query])
