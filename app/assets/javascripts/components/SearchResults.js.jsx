@@ -34,10 +34,10 @@ class SearchResults extends React.Component{
     renderItems(){
         return(
             this.props.results.map((item) => {
-                return(<SearchResultItem edit_action = {this.props.action + '/' + item['id'] + '/edit'}
-                        show_action = {this.props.action + '/'}
-                        item_id = {item['id']}
-                        item_title = {item['name']}/>);
+                return(<SearchResultItem edit_action = {this.props.action + '/' + item.id + '/edit'}
+                        show_action = {this.props.action + '/' + item.id}
+                        item_id = {item.id}
+                        item_title = {item.name}/>);
             })
         );
     }

@@ -42,7 +42,14 @@ class SearchWrapper extends React.Component{
     }
 
     handleOnSearchSubmit(search){
-        this.fetchResults({query: search, all: false});
+        if (search == ''){
+            this.state.results = [];
+            this.state.page = 1;
+            this.fetchResults({query: search, all: true});
+        }
+        else {
+            this.fetchResults({query: search, all: false});
+        }
     }
 
     render(){
