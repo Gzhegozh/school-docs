@@ -25,11 +25,13 @@ class SchoolGroup < ActiveRecord::Base
         end
       })
     end
+    rescue Faraday::ConnectionFailed
   end
 
   after_commit '__elasticsearch__.index_document', on: :create
   after_commit '__elasticsearch__.update_document', on: :update
   after_commit :update_index_on_destroy, on: :destroy
+  rescue Faraday::ConnectionFailed
 
   def update_index_on_destroy
     __elasticsearch__.client.delete(
@@ -37,6 +39,7 @@ class SchoolGroup < ActiveRecord::Base
         type: SchoolGroup.document_type,
         id: id
     )
+    rescue Faraday::ConnectionFailed
   end
 
   def self.search(params, *args)

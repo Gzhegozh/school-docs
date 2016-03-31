@@ -5,6 +5,11 @@ class BasicsSection extends React.Component {
 
     infoFromProfile(e){
         e.preventDefault();
+        this.name.value = 'John';
+        this.last_name.value = 'Petrucci';
+        this.middle_name.value = 'Smith';
+        this.birthday.value = '2016-03-10';
+        this.props.updatePercentage('Basics', this.calculatePercentage());
     }
 
     calculatePercentage(){
